@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h>
+//#include <stdlib.h>
 
 int main(void) {
 
@@ -69,7 +69,8 @@ int main(void) {
 //	char str4[3] = "hello";
 	char str5[] = "hello";
 	char str6[6] = { 'h', 'e', 'l', 'l', 'o', '\0'};
-	
+	int len;
+
 	printf("%s\n", name);
 	printf("%c\n", str6[0]);
 	printf("%s\n", str6);
@@ -79,6 +80,21 @@ int main(void) {
 
 	/* 문자열 내장함수
 	strcpy(), strcmp(), strlen(), strncpy()*/
+	strncpy(str1, "I don't know you", 19);
+	stcmp(str1, str2);
+	len = strlen(str1);
 
+	/* 변수인데 상수인 변수에 대해 const 변수 상수화 지시자*/
+	const int num = 1234;
+//	num = 5678; ==> num은 상수이기 때문에 다른값으로 변경하려고 하면 오류로 처리된다.
+
+	/* LValue와 RValue
+	대입연산자 기준으로 왼쪽에 있는게 LValue, 값을 대입받는 변수로서 작용 RValue는 변수에서 값을 읽어서 값으로 사용*/
+	
+	/* 변수를 선언할 때 유의할 점
+	1. 키워드(예약어) 와 다른 식별자 이름
+	2. 식별자 이름을 쓸 때에는 알파벳, 아라비아숫자, _(언더바 : 주로 단어 사이에 구분하기위함)만 쓸 수 있다.
+	3. 숫자로 변수명이 시작될 수 없다.
+	4. */
 	return 0;
 }

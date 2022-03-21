@@ -47,7 +47,5 @@ int main(void) {
 	printf("%.2f\n", f);
 	printf("%.30f\n", b);
 
-	
-
 	return 0;
 }

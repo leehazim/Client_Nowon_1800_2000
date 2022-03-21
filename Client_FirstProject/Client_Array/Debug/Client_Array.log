@@ -1,3 +1,7 @@
 ﻿  main.c
-C:\Users\prett\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Client_Array\main.c(77,8): warning C4013: 'strcpy'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
-  Client_Array.vcxproj -> C:\Users\prett\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Debug\Client_Array.exe
+C:\Users\prett\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Client_Array\main.c(78,8): warning C4013: 'strcpy'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\prett\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Client_Array\main.c(83,9): warning C4013: 'strncpy'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\prett\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Client_Array\main.c(84,7): warning C4013: 'stcmp'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\prett\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Client_Array\main.c(85,14): warning C4013: 'strlen'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+main.obj : error LNK2019: _stcmp_main 함수에서 참조되는 확인할 수 없는 외부 기호
+C:\Users\prett\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Debug\Client_Array.exe : fatal error LNK1120: 1개의 확인할 수 없는 외부 참조입니다.
