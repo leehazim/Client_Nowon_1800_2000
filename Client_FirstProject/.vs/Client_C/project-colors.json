@@ -15,7 +15,17 @@
       "ProjectGuid": "c40d513f-fa30-43ae-8354-e03dcf38519f",
       "DisplayName": "Client_Variable",
       "ColorIndex": 2
+    },
+    "eba63291-190c-42f4-8ef0-400a9cbf4154": {
+      "ProjectGuid": "eba63291-190c-42f4-8ef0-400a9cbf4154",
+      "DisplayName": "Client_Operator",
+      "ColorIndex": 3
+    },
+    "72207b62-131d-448a-81f4-60b8d441295a": {
+      "ProjectGuid": "72207b62-131d-448a-81f4-60b8d441295a",
+      "DisplayName": "Client_InputFuncScanf",
+      "ColorIndex": 4
     }
   },
-  "NextColorIndex": 3
+  "NextColorIndex": 5
 }

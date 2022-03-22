@@ -1,9 +1,9 @@
 #pragma once
-#include "define.h"
+#include <windows.h>
 class Player{
 private:
 	int m_x, m_y;
-	tag_shape m_shape;
+	/*tag_shape m_shape;*/
 
 public:
 	Player();

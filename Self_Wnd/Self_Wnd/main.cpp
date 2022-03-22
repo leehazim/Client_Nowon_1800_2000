@@ -1,4 +1,4 @@
-#include "define.h"
+#include "Player.h"
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 HINSTANCE g_hInst;
@@ -40,38 +40,24 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 
 	HDC hdc;
 	PAINTSTRUCT ps;
-	static int x, y;
+	static Player *P;
 
 	switch (msg) {
 	case WM_CREATE:
-		x = y = 10;
+		P = new Player;
 		return 0;
 
 	case WM_KEYDOWN:
-		switch (LOWORD(wParam)) {
-		case VK_RIGHT:
-			x = min(x+10, 700);
-			break;
-		case VK_LEFT:
-			x = max(x- 10, 10);
-			break;
-		case VK_UP:
-			y = max(y-10, 10);
-			break;
-		case VK_DOWN:
-			y = min(y+10, 530);
-			break;
-		}
+		P->Move(LOWORD(wParam));
 		InvalidateRect(hwnd, NULL, TRUE);
 		return 0;
 
 	case WM_PAINT:
-		hdc = BeginPaint(hwnd, &ps);
-		Rectangle(hdc, x, y, x + 10, y + 10);
-		EndPaint(hwnd, &ps);
+		P->Draw(hwnd);
 		return 0;
 
 	case WM_DESTROY:
+		delete P;
 		PostQuitMessage(0);
 		return 0;
 	}
