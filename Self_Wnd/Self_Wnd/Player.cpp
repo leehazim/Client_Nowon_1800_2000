@@ -6,11 +6,21 @@ Player::Player(){
 	/*m_shape = RECTANGLE;*/
 }
 
+int Player::GetX() const
+{
+	return m_x;
+}
+
+int Player::GetY() const
+{
+	return m_y;
+}
+
 void Player::Move(int key){
 	
 	switch (key) {
 	case VK_LEFT:
-		m_x = max(m_x - 10, 100);
+		m_x = max(m_x - 10, 10);
 		break;
 	case VK_RIGHT:
 		m_x = min(m_x + 10, 700);
@@ -31,5 +41,4 @@ void Player::Draw(HWND hwnd){
 
 	hdc = BeginPaint(hwnd, &ps);
 	Rectangle(hdc, m_x, m_y, m_x + 10, m_y + 10);
-	EndPaint(hwnd, &ps);
 }

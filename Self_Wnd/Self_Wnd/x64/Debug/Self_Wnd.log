@@ -1,6 +1,2 @@
-﻿  Player.cpp
-  main.cpp
-C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Self_Wnd\Self_Wnd\main.cpp(41,6): warning C4101: 'hdc' :참조되지 않은 지역 변수입니다.
-C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Self_Wnd\Self_Wnd\main.cpp(42,14): warning C4101: 'ps' :참조되지 않은 지역 변수입니다.
-  코드를 생성하고 있습니다...
-C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Self_Wnd\Self_Wnd\main.cpp(51): error C4700: 초기화되지 않은 'P' 지역 변수를 사용했습니다.
+﻿  main.cpp
+  Self_Wnd.vcxproj -> C:\Users\prett\Documents\GitHub\Client_Nowon_1800_2000\Self_Wnd\x64\Debug\Self_Wnd.exe

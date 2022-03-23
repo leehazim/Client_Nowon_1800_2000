@@ -7,6 +7,9 @@ private:
 
 public:
 	Player();
+
+	int GetX() const;
+	int GetY() const;
 	void Move(int key);
 	void Draw(HWND hwnd);
 };
