@@ -25,7 +25,17 @@
       "ProjectGuid": "72207b62-131d-448a-81f4-60b8d441295a",
       "DisplayName": "Client_InputFuncScanf",
       "ColorIndex": 4
+    },
+    "16bc9696-80b4-494a-905f-45560d796e7b": {
+      "ProjectGuid": "16bc9696-80b4-494a-905f-45560d796e7b",
+      "DisplayName": "Client_IfSwitch",
+      "ColorIndex": 5
+    },
+    "38239dd3-605f-441e-ba14-eb871ec97864": {
+      "ProjectGuid": "38239dd3-605f-441e-ba14-eb871ec97864",
+      "DisplayName": "Client_Loop",
+      "ColorIndex": 6
     }
   },
-  "NextColorIndex": 5
+  "NextColorIndex": 7
 }
