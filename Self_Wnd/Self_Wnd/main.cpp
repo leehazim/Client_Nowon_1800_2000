@@ -1,5 +1,4 @@
-#include "Player.h"
-#include <Math.h>
+#include "Enemy.h"
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 HINSTANCE g_hInst;
@@ -43,32 +42,21 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	PAINTSTRUCT ps;
 	HBRUSH MyBrush, OldBrush;
 
-	static Player *P;
-	static int enemyX, enemyY;
-	static double distance, total;
-	int dx, dy;
+	static Player* P;
+	static Enemy* E[10];
 
 	switch (msg) {
 	case WM_CREATE:
 		P = new Player;
-		enemyX = enemyY = 100;
+		for (int i = 0; i < 10; i++) {
+			E[i] = new Enemy(P);
+		} 
 		SetTimer(hwnd, 1, 20, NULL);
 		return 0;
 		
 	case WM_TIMER:
-		total = pow((P->GetX() - enemyX), 2) + pow((P->GetY() - enemyY), 2);
-		distance = sqrt(total);
-		distance = 1.0;
-		if (distance < 10.0 /*&& distance > 0*/) {
-			if ((P->GetX() - enemyX) > 0)	dx = +1;
-			else							dx = -1;
-
-			if ((P->GetY() - enemyY) > 0)	dy = +1;
-			else							dy = -1;
-
-			enemyX += dx;
-			enemyY += dy;
-		}
+		for(int i = 0; i<10; i++)
+			E[i]->Move();
 		InvalidateRect(hwnd, NULL, TRUE);
 		return 0;
 
@@ -84,14 +72,17 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		Rectangle(hdc, P->GetX(), P->GetY(), P->GetX() + 10, P->GetY() + 10);
 		MyBrush = CreateSolidBrush(RGB(255, 0, 0));
 		OldBrush = (HBRUSH)SelectObject(hdc, MyBrush);
-
-		Rectangle(hdc, enemyX, enemyY, enemyX + 10, enemyY + 10);
+		
+		for(int i = 0; i < 10; i++)
+			Rectangle(hdc, E[i]->GetX(), E[i]->GetY(), E[i]->GetX() + 10, E[i]->GetY() + 10);
 		DeleteObject(SelectObject(hdc, OldBrush));
 		EndPaint(hwnd, &ps);
 		return 0;
 
 	case WM_DESTROY:
 		delete P;
+		for (int i = 0; i < 10; i++)
+			delete E[i];
 		KillTimer(hwnd, 1);
 		PostQuitMessage(0);
 		return 0;

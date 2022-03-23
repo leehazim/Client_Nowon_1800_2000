@@ -1,5 +1,7 @@
 #pragma once
 #include <windows.h>
+#include <stdlib.h>
+#include <Math.h>
 class Player{
 private:
 	int m_x, m_y;
