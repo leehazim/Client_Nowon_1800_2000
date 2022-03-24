@@ -5,6 +5,12 @@ int main(void) {
 	
 	int number;
 	char temp[50];
+	char ch;
+	scanf("%c", &ch);
+	//getchar();
+	printf("%c\n", ch);
+
+	printf("정수입력 : ");
 	scanf("%d", &number);
 	/* scanf는 콘솔에서 사용자로부터 데이터를 입력받기 위해서 사용하는 C언어에서 제공하는 함수다.
 	printf와 비슷하게 ("입력될 포멧", 1:1 대응 &변수) 방식으로 사용된다.
@@ -19,5 +25,6 @@ int main(void) {
 	/* 오버플로우에 대응하기 위해서 사이즈를 입력받아서 입력이 안되는 것을 방지하는 것인데
 	C++에서 오버플로우 방지를 어떻게 하고 있더라.
 	*/
+
 	return 0;
 }
