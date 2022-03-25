@@ -1,0 +1,3 @@
+﻿  main.c
+C:\Users\prett\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Client_Pointer\main.c(18,9): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'int *'입니다.
+  Client_Pointer.vcxproj -> C:\Users\prett\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Debug\Client_Pointer.exe

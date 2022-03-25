@@ -1,12 +1,6 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include "Test.h"
 #pragma warning(disable: 4996)
 
-int sum(int, int);
-int sub(int, int);
-int div1(int, int);
-int mul(int, int);
-int mod(int, int);
 int OperationCount;
 
 int Factorial(int num) {
@@ -19,7 +13,7 @@ int main(void) {
 	char str[5];
 	int result = 0;
 	
-	for (;1;) {
+	for (; 1;) {
 
 		printf("정수입력 >> ");
 		scanf("%d", &a);
@@ -36,8 +30,7 @@ int main(void) {
 		else if (!strcmp(str, "end"))	{ break;				}
 
 		printf("%d\n", result);
-		printf("%d\n", OperationCount);
-		
+		printf("%d\n", OperationCount);	
 	}
 
 	result = 1;
