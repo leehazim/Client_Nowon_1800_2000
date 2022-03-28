@@ -1,9 +1,11 @@
 #include "Enemy.h"
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
+LRESULT CALLBACK MenuProc(HWND, UINT, WPARAM, LPARAM);
 HINSTANCE g_hInst;
 HWND g_hWnd;
 LPCTSTR lpszClass = TEXT("Follow Rect");
+LPCTSTR MenuClass = TEXT("Menu");
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR nCmdParam, int nCmdShow) {
 
@@ -24,6 +26,10 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR nCmdPar
 	WndClass.lpszMenuName = NULL;
 	RegisterClass(&WndClass);
 
+	WndClass.lpfnWndProc = MenuProc;
+	WndClass.lpszClassName = MenuClass;
+	RegisterClass(&WndClass);
+
 	hWnd = CreateWindow(lpszClass, lpszClass, WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, CW_USEDEFAULT, 800, 640,
 		NULL, (HMENU)NULL, hInstance, NULL);
@@ -41,6 +47,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	HDC hdc;
 	PAINTSTRUCT ps;
 	HBRUSH MyBrush, OldBrush;
+	HWND MenuWnd;
 
 	static Player* P;
 	static Enemy* E[10];
@@ -53,7 +60,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		} 
 		SetTimer(hwnd, 1, 20, NULL);
 		return 0;
-		
+
+	case WM_LBUTTONDOWN:
+		MenuWnd = CreateWindow(MenuClass, MenuClass, WS_POPUP | WS_VISIBLE | WS_CAPTION,
+							   CW_USEDEFAULT, CW_USEDEFAULT, 400, 300, hwnd, (HMENU)NULL,
+							   g_hInst, NULL);
+		return 0;
+
 	case WM_TIMER:
 		for(int i = 0; i<10; i++)
 			E[i]->Move();
@@ -85,6 +98,30 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 			delete E[i];
 		KillTimer(hwnd, 1);
 		PostQuitMessage(0);
+		return 0;
+	}
+
+	return DefWindowProc(hwnd, msg, wParam, lParam);
+}
+
+LRESULT CALLBACK MenuProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+	
+	switch (msg) {
+	case WM_CREATE:
+		CreateWindow(TEXT("button"), TEXT("Close"), WS_CHILD | WS_VISIBLE  | BS_PUSHBUTTON,
+					 200, 100, 50, 20, hwnd, (HMENU)1, g_hInst, NULL);
+		return 0;
+
+	case WM_COMMAND:
+		switch (wParam) {
+		case 1: 
+			SendMessage(hwnd, WM_DESTROY, 0, 0);
+			break;
+		}
+		return 0;
+
+	case WM_DESTROY:
+		DestroyWindow(hwnd);
 		return 0;
 	}
 
