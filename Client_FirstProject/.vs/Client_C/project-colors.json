@@ -35,7 +35,17 @@
       "ProjectGuid": "38239dd3-605f-441e-ba14-eb871ec97864",
       "DisplayName": "Client_Loop",
       "ColorIndex": 6
+    },
+    "7fe5a6ec-60d7-4976-9876-c869fc5ec543": {
+      "ProjectGuid": "7fe5a6ec-60d7-4976-9876-c869fc5ec543",
+      "DisplayName": "Client_Function",
+      "ColorIndex": 7
+    },
+    "990e084a-1dac-482e-872f-502a2bbf6e6a": {
+      "ProjectGuid": "990e084a-1dac-482e-872f-502a2bbf6e6a",
+      "DisplayName": "Client_Pointer",
+      "ColorIndex": 8
     }
   },
-  "NextColorIndex": 7
+  "NextColorIndex": 9
 }
