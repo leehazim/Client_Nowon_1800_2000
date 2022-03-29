@@ -1,4 +1,2 @@
 ﻿  main.c
-C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Client_Pointer\main.c(91,16): warning C4133: '=': 'double *'과(와) 'int *' 사이의 형식이 호환되지 않습니다.
-C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Client_Pointer\main.c(63,1): warning C4090: '초기화 중': 'const' 한정자가 서로 다릅니다.
   Client_Pointer.vcxproj -> C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Debug\Client_Pointer.exe

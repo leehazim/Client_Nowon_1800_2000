@@ -45,7 +45,22 @@
       "ProjectGuid": "990e084a-1dac-482e-872f-502a2bbf6e6a",
       "DisplayName": "Client_Pointer",
       "ColorIndex": 8
+    },
+    "71a21f3f-2e30-42a8-b112-962e6d16bcad": {
+      "ProjectGuid": "71a21f3f-2e30-42a8-b112-962e6d16bcad",
+      "DisplayName": "ArrayAndPointer",
+      "ColorIndex": 9
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "기타 파일",
+      "ColorIndex": -1
+    },
+    "a8707ac7-a565-4260-ab34-fc42da778999": {
+      "ProjectGuid": "a8707ac7-a565-4260-ab34-fc42da778999",
+      "DisplayName": "Client_PonterForPointer",
+      "ColorIndex": 10
     }
   },
-  "NextColorIndex": 9
+  "NextColorIndex": 11
 }

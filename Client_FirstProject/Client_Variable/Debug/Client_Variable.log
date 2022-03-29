@@ -1,8 +1,8 @@
 ﻿  main.c
-C:\Users\prett\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Client_Variable\main.c(45,9): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\prett\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Client_Variable\main.c(17,15): warning C4101: 'ua' :참조되지 않은 지역 변수입니다.
-C:\Users\prett\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Client_Variable\main.c(18,8): warning C4101: 's' :참조되지 않은 지역 변수입니다.
-C:\Users\prett\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Client_Variable\main.c(31,7): warning C4101: 'c' :참조되지 않은 지역 변수입니다.
-C:\Users\prett\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Client_Variable\main.c(19,7): warning C4101: 'l' :참조되지 않은 지역 변수입니다.
-C:\Users\prett\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Client_Variable\main.c(20,12): warning C4101: 'll' :참조되지 않은 지역 변수입니다.
-  Client_Variable.vcxproj -> C:\Users\prett\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Debug\Client_Variables.exe
+C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Client_Variable\main.c(44,9): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Client_Variable\main.c(17,15): warning C4101: 'ua' :참조되지 않은 지역 변수입니다.
+C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Client_Variable\main.c(18,8): warning C4101: 's' :참조되지 않은 지역 변수입니다.
+C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Client_Variable\main.c(31,7): warning C4101: 'c' :참조되지 않은 지역 변수입니다.
+C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Client_Variable\main.c(19,7): warning C4101: 'l' :참조되지 않은 지역 변수입니다.
+C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Client_Variable\main.c(20,12): warning C4101: 'll' :참조되지 않은 지역 변수입니다.
+  Client_Variable.vcxproj -> C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Debug\Client_Variables.exe

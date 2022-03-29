@@ -1,3 +1,3 @@
 ﻿  main.c
-C:\Users\prett\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Client_InputFuncScanf\main.c(18,9): warning C4477: 'printf' : 서식 문자열 '%X'에 'unsigned int' 형식의 인수가 필요하지만 variadic 인수 2의 형식이 'int *'입니다.
-  Client_InputFuncScanf.vcxproj -> C:\Users\prett\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Debug\Client_InputFuncScanf.exe
+C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Client_InputFuncScanf\main.c(18,9): warning C4477: 'printf' : 서식 문자열 '%X'에 'unsigned int' 형식의 인수가 필요하지만 variadic 인수 2의 형식이 'int *'입니다.
+  Client_InputFuncScanf.vcxproj -> C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Debug\Client_InputFuncScanf.exe
