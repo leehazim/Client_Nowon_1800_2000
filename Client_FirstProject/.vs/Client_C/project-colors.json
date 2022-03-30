@@ -60,7 +60,22 @@
       "ProjectGuid": "a8707ac7-a565-4260-ab34-fc42da778999",
       "DisplayName": "Client_PonterForPointer",
       "ColorIndex": 10
+    },
+    "b8e3725e-6f57-41dd-9705-97a2dbf533de": {
+      "ProjectGuid": "b8e3725e-6f57-41dd-9705-97a2dbf533de",
+      "DisplayName": "Client_FuncPointer",
+      "ColorIndex": 11
+    },
+    "f376741a-54f0-40a7-ae2f-22664269295c": {
+      "ProjectGuid": "f376741a-54f0-40a7-ae2f-22664269295c",
+      "DisplayName": "Clinet_Typedef",
+      "ColorIndex": 12
+    },
+    "22ee6efc-50ed-47e9-8a5f-adc614438a6d": {
+      "ProjectGuid": "22ee6efc-50ed-47e9-8a5f-adc614438a6d",
+      "DisplayName": "Client_Struct",
+      "ColorIndex": 13
     }
   },
-  "NextColorIndex": 11
+  "NextColorIndex": 14
 }

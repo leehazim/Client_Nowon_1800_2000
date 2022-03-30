@@ -28,7 +28,7 @@ void SetCursorXY(int x, int y) {
 	Position.X = x;
 	Position.Y = y;
 
-	SetConsoleCursorPosition(CONSOLE_REAL_OUTPUT_HANDLE, Position);
+	SetConsoleCursorPosition(, Position);
 }
 
 int main(void) {

@@ -3,7 +3,7 @@
 #pragma warning (disable : 4996)
 #pragma warning(disable : 6031)
 
-#define Swap(type, a, b) do{ type t = a ; a= b; b= t;}while(0)
+#define Swap(type, a, b) do{ type t = a ; a = b; b = t;}while(0)
 
 void func(void* Data1, void* Data2, const char* DataType) {
 	
