@@ -33,6 +33,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Clinet_Typedef", "Clinet_Ty
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Client_Struct", "Client_Struct\Client_Struct.vcxproj", "{22EE6EFC-50ED-47E9-8A5F-ADC614438A6D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Client_Union", "Client_Union\Client_Union.vcxproj", "{C3134D49-403C-47B0-ADD8-EA935B9F6281}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -161,6 +163,14 @@ Global
 		{22EE6EFC-50ED-47E9-8A5F-ADC614438A6D}.Release|x64.Build.0 = Release|x64
 		{22EE6EFC-50ED-47E9-8A5F-ADC614438A6D}.Release|x86.ActiveCfg = Release|Win32
 		{22EE6EFC-50ED-47E9-8A5F-ADC614438A6D}.Release|x86.Build.0 = Release|Win32
+		{C3134D49-403C-47B0-ADD8-EA935B9F6281}.Debug|x64.ActiveCfg = Debug|x64
+		{C3134D49-403C-47B0-ADD8-EA935B9F6281}.Debug|x64.Build.0 = Debug|x64
+		{C3134D49-403C-47B0-ADD8-EA935B9F6281}.Debug|x86.ActiveCfg = Debug|Win32
+		{C3134D49-403C-47B0-ADD8-EA935B9F6281}.Debug|x86.Build.0 = Debug|Win32
+		{C3134D49-403C-47B0-ADD8-EA935B9F6281}.Release|x64.ActiveCfg = Release|x64
+		{C3134D49-403C-47B0-ADD8-EA935B9F6281}.Release|x64.Build.0 = Release|x64
+		{C3134D49-403C-47B0-ADD8-EA935B9F6281}.Release|x86.ActiveCfg = Release|Win32
+		{C3134D49-403C-47B0-ADD8-EA935B9F6281}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

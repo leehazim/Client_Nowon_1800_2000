@@ -75,7 +75,12 @@
       "ProjectGuid": "22ee6efc-50ed-47e9-8a5f-adc614438a6d",
       "DisplayName": "Client_Struct",
       "ColorIndex": 13
+    },
+    "c3134d49-403c-47b0-add8-ea935b9f6281": {
+      "ProjectGuid": "c3134d49-403c-47b0-add8-ea935b9f6281",
+      "DisplayName": "Client_Union",
+      "ColorIndex": 14
     }
   },
-  "NextColorIndex": 14
+  "NextColorIndex": 15
 }

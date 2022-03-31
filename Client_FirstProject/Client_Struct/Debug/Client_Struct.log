@@ -1,2 +1,4 @@
-﻿  main.c
-  Client_Struct.vcxproj -> C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Debug\Client_Struct.exe
+﻿  exam.c
+C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Client_Struct\exam.c(16,6): warning C4013: 'Swap'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+exam.obj : error LNK2019: _Swap_main 함수에서 참조되는 확인할 수 없는 외부 기호
+C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Debug\Client_Struct.exe : fatal error LNK1120: 1개의 확인할 수 없는 외부 참조입니다.
