@@ -1,5 +1,7 @@
 #include "Enemy.h"
 
+#define MAXENEMY 20
+
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 LRESULT CALLBACK MenuProc(HWND, UINT, WPARAM, LPARAM);
 HINSTANCE g_hInst;
@@ -50,26 +52,31 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	HWND MenuWnd;
 
 	static Player* P;
-	static Enemy* E[10];
+	static Enemy* E[MAXENEMY];
 
 	switch (msg) {
 	case WM_CREATE:
 		P = new Player;
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < MAXENEMY; i++) {
 			E[i] = new Enemy(P);
 		} 
 		SetTimer(hwnd, 1, 20, NULL);
 		return 0;
 
-	case WM_LBUTTONDOWN:
+	/*case WM_LBUTTONDOWN:
 		MenuWnd = CreateWindow(MenuClass, MenuClass, WS_POPUP | WS_VISIBLE | WS_CAPTION,
 							   CW_USEDEFAULT, CW_USEDEFAULT, 400, 300, hwnd, (HMENU)NULL,
 							   g_hInst, NULL);
-		return 0;
+		return 0;*/
 
 	case WM_TIMER:
-		for(int i = 0; i<10; i++)
+		for (int i = 0; i < MAXENEMY; i++) {
+			if (!(rand() % 1000)) E[i]->SetExist(true);
+		}
+		for (int i = 0; i < MAXENEMY; i++) {
+			if (!E[i]->GetExist()) continue;
 			E[i]->Move();
+		}
 		InvalidateRect(hwnd, NULL, TRUE);
 		return 0;
 
@@ -86,8 +93,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		MyBrush = CreateSolidBrush(RGB(255, 0, 0));
 		OldBrush = (HBRUSH)SelectObject(hdc, MyBrush);
 		
-		for(int i = 0; i < 10; i++)
+		
+		for (int i = 0; i < MAXENEMY; i++) {
+			if (!E[i]->GetExist()) continue;
 			Rectangle(hdc, E[i]->GetX(), E[i]->GetY(), E[i]->GetX() + 10, E[i]->GetY() + 10);
+		}
 		DeleteObject(SelectObject(hdc, OldBrush));
 		EndPaint(hwnd, &ps);
 		return 0;
