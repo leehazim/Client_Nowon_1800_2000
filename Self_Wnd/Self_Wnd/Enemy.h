@@ -1,5 +1,6 @@
 #pragma once
 #include "Player.h"
+#include "Bullet.h"
 class Enemy{
 protected:
 	bool exist;

@@ -26,5 +26,4 @@ void Enemy::Move() {
 		m_x += m_dx;
 		m_y += m_dy;
 	}
-
 }
