@@ -80,7 +80,17 @@
       "ProjectGuid": "c3134d49-403c-47b0-add8-ea935b9f6281",
       "DisplayName": "Client_Union",
       "ColorIndex": 14
+    },
+    "2dd27643-39cd-4987-91d8-cf7a2db60c64": {
+      "ProjectGuid": "2dd27643-39cd-4987-91d8-cf7a2db60c64",
+      "DisplayName": "Client_Enum",
+      "ColorIndex": 15
+    },
+    "189efa22-b873-417b-a54a-3df6eb5e9c25": {
+      "ProjectGuid": "189efa22-b873-417b-a54a-3df6eb5e9c25",
+      "DisplayName": "Client_Dynamic",
+      "ColorIndex": 0
     }
   },
-  "NextColorIndex": 15
+  "NextColorIndex": 1
 }

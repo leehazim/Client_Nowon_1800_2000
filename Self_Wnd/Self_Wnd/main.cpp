@@ -45,11 +45,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR nCmdPar
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 
-
 	HDC hdc;
 	PAINTSTRUCT ps;
 	HBRUSH MyBrush, OldBrush;
 	HWND MenuWnd;
+	int i;
 
 	static Player* P;
 	static Bullet* B;
@@ -59,7 +59,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	case WM_CREATE:
 		P = new Player;
 		B = new Bullet(P);
-		for (int i = 0; i < MAXENEMY; i++) {
+		for (i = 0; i < MAXENEMY; i++) {
 			E[i] = new Enemy(P);
 		} 
 		SetTimer(hwnd, 1, 20, NULL);
@@ -72,10 +72,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		return 0;*/
 
 	case WM_TIMER:
-		for (int i = 0; i < MAXENEMY; i++) {
-			if (!(rand() % 1000)) E[i]->SetExist(true);
-		}
-		for (int i = 0; i < MAXENEMY; i++) {
+		for (i = 0; i < MAXENEMY; i++) if (!(rand() % 1000)) E[i]->SetExist(true);
+		for (i = 0; i < MAXENEMY; i++) {
 			if (!E[i]->GetExist()) continue;
 			E[i]->Move();
 		}
@@ -84,9 +82,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 
 	case WM_KEYDOWN:
 		switch (LOWORD(wParam)) {
-		case VK_SPACE:
-			B->SetExist(true);
-			break;
+		case VK_SPACE: B->SetExist(true); break;
 		}
 		P->Move(LOWORD(wParam));
 		P->SetDirect(LOWORD(wParam));
@@ -100,7 +96,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		Rectangle(hdc, P->GetX(), P->GetY(), P->GetX() + 10, P->GetY() + 10);
 		MyBrush = CreateSolidBrush(RGB(255, 0, 0));
 		OldBrush = (HBRUSH)SelectObject(hdc, MyBrush);
-		for (int i = 0; i < MAXENEMY; i++) {
+		for (i = 0; i < MAXENEMY; i++) {
 			if (!E[i]->GetExist()) continue;
 			Rectangle(hdc, E[i]->GetX(), E[i]->GetY(), E[i]->GetX() + 10, E[i]->GetY() + 10);
 		}
@@ -113,8 +109,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 
 	case WM_DESTROY:
 		delete P;
-		for (int i = 0; i < 10; i++)
-			delete E[i];
+		for (i = 0; i < 10; i++) delete E[i];
 		KillTimer(hwnd, 1);
 		PostQuitMessage(0);
 		return 0;
