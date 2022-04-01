@@ -61,7 +61,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		B = new Bullet(P);
 		for (i = 0; i < MAXENEMY; i++) {
 			E[i] = new Enemy(P);
-		} 
+		}
 		SetTimer(hwnd, 1, 20, NULL);
 		return 0;
 
@@ -100,9 +100,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 			if (!E[i]->GetExist()) continue;
 			Rectangle(hdc, E[i]->GetX(), E[i]->GetY(), E[i]->GetX() + 10, E[i]->GetY() + 10);
 		}
-		if(B->getExist()) B->Move(P->GetDirect());
+		if (B->getExist()){
+			B->Move(P->GetDirect());
 		Rectangle(hdc, B->GetX(), B->GetY(), B->GetX() + 10, B->GetY() + 10);
-
+		}
 		DeleteObject(SelectObject(hdc, OldBrush));
 		EndPaint(hwnd, &ps);
 		return 0;

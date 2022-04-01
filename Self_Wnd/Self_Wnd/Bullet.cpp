@@ -1,7 +1,6 @@
 #include "Bullet.h"
 
 void Bullet::Move(int key) {
-	static int count = 0;
 	switch (key) {
 	case VK_LEFT:  m_dx = -1; m_dy = 0; break;
 	case VK_RIGHT: m_dx = +1; m_dy = 0; break;
@@ -12,5 +11,8 @@ void Bullet::Move(int key) {
 	m_x += m_dx;
 	m_y += m_dy;
 	count++;
-	if (count == m_range) exist = false;
+	if (count == m_range) {
+		exist = false;
+		count = 0;
+	}
 }

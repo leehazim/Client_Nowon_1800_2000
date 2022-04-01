@@ -6,6 +6,7 @@ private:
 	int m_x, m_y;
 	int m_dx, m_dy;
 	int m_range;
+	int count;
 	Player* pPlayer;
 
 public:
@@ -15,6 +16,7 @@ public:
 		m_y = pPlayer->GetY();
 		m_range = 10;
 		m_dx = m_dy = 0;
+		count = 0;
 	}
 	void Move(int key);
 	void SetExist(bool data) { exist = data; }
