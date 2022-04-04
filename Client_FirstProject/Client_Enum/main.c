@@ -16,7 +16,7 @@ enum tag_Subject { KOREAN, ENGLISH, MATH, MAXSUBJECT };
 5. 점프하기 등이 있을때
 이런 상태들을 정수만으로 기억하면 기억하기 불편해서 이름을 주고 싶을때 사용하는 경우가 많다.*/
 enum Player_State {
-	Wait, Walk, Run, Attack, Jump, 
+	Wait = 1, Walk, Run, Attack, Jump, 
 };
 enum Jump_State {
 	Idle, PrepareJump, InFlight, Falling, OnGround, 

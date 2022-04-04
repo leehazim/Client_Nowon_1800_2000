@@ -84,12 +84,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	case WM_KEYDOWN:
 		key = LOWORD(wParam);
 		P->Move(key);
-		for (i = 0; i < 10; i++) 
-			if (B[i]->getExist() == false) {
-				B[i]->Make(key, key);
-			break;
+		for (i = 0; i < 10; i++) {
+			if (B[i]->getExist() == false) { B[i]->Make(key, key); break; }
 		}
-		
 		InvalidateRect(hwnd, NULL, TRUE);
 		return 0;
 

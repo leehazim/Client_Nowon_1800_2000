@@ -90,7 +90,12 @@
       "ProjectGuid": "189efa22-b873-417b-a54a-3df6eb5e9c25",
       "DisplayName": "Client_Dynamic",
       "ColorIndex": 0
+    },
+    "d0c9d5c6-f918-4d1c-be9a-d10998783e43": {
+      "ProjectGuid": "d0c9d5c6-f918-4d1c-be9a-d10998783e43",
+      "DisplayName": "Client_Fileio",
+      "ColorIndex": 1
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 2
 }

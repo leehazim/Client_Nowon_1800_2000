@@ -25,14 +25,12 @@ int main(void) {
 	a = (int*)calloc(1, sizeof(int));
 	*a = 3; printf("%d\n", *a);
 
-	free(a);/* 동적할당된 메모리는 직접 헤재해주지않으면 프로그램 종료후에도 그 메모리공간은 운영체제에게 반납되지않는다
-			그래서 동적할당 받은 공간의 포인터로 해제함수를 호출*/
+	free(a);/* 동적할당된 메모리는 직접 헤재해주지않으면 프로그램 종료후에도 그 메모리공간은 운영체제에게 반납되지않는다*/
+			/* 그래서 동적할당 받은 공간의 포인터로 해제함수를 호출*/
+
+	//a = (int*)malloc(count * sizeof(int));
 	int count = 16;
 	a = (int*)calloc(count, sizeof(int));
-	//a = (int*)malloc(count * sizeof(int));
-	a[0] = 1;
-	a[1] = 5;
-	a[5] = 6;
 	for (int i = 0; i < count; i++) a[i] = i + 1;
 
 	a = (int*)realloc(a, 20 * sizeof(int));
