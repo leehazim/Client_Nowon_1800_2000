@@ -7,7 +7,6 @@ private:
 	int m_x, m_y;
 	int direct;
 	/*tag_shape m_shape;*/
-
 public:
 	Player();
 

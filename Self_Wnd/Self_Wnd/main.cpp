@@ -52,15 +52,16 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	int i;
 
 	static Player* P;
-	static Bullet* B;
+	static Bullet* B[10];
 	static Enemy* E[MAXENEMY];
+	static int key;
 
 	switch (msg) {
 	case WM_CREATE:
 		P = new Player;
-		B = new Bullet(P);
 		for (i = 0; i < MAXENEMY; i++) {
 			E[i] = new Enemy(P);
+			B[i] = new Bullet(P);
 		}
 		SetTimer(hwnd, 1, 20, NULL);
 		return 0;
@@ -81,11 +82,14 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		return 0;
 
 	case WM_KEYDOWN:
-		switch (LOWORD(wParam)) {
-		case VK_SPACE: B->SetExist(true); break;
+		key = LOWORD(wParam);
+		P->Move(key);
+		for (i = 0; i < 10; i++) 
+			if (B[i]->getExist() == false) {
+				B[i]->Make(key, key);
+			break;
 		}
-		P->Move(LOWORD(wParam));
-		P->SetDirect(LOWORD(wParam));
+		
 		InvalidateRect(hwnd, NULL, TRUE);
 		return 0;
 
@@ -100,9 +104,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 			if (!E[i]->GetExist()) continue;
 			Rectangle(hdc, E[i]->GetX(), E[i]->GetY(), E[i]->GetX() + 10, E[i]->GetY() + 10);
 		}
-		if (B->getExist()){
-			B->Move(P->GetDirect());
-		Rectangle(hdc, B->GetX(), B->GetY(), B->GetX() + 10, B->GetY() + 10);
+		DeleteObject(SelectObject(hdc, OldBrush));
+		MyBrush = CreateSolidBrush(RGB(0, 0, 255));
+		OldBrush = (HBRUSH)SelectObject(hdc, MyBrush);
+		for (i = 0; i < 10; i++) {
+			if (!B[i]->getExist()) continue;
+			B[i]->Move();
+			Rectangle(hdc, B[i]->GetX(), B[i]->GetY(), B[i]->GetX() + 10, B[i]->GetY() + 10);
 		}
 		DeleteObject(SelectObject(hdc, OldBrush));
 		EndPaint(hwnd, &ps);
