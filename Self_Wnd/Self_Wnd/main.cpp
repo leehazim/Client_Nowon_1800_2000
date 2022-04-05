@@ -1,4 +1,4 @@
-#include "Enemy.h"
+#include "Bullet.h"
 
 #define MAXENEMY 20
 
@@ -42,27 +42,26 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR nCmdPar
 		DispatchMessage(&Msg);
 	}
 }
+ Player P;
+ Bullet* B[10];
+ Enemy* E[MAXENEMY];
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 
 	HDC hdc;
 	PAINTSTRUCT ps;
 	HBRUSH MyBrush, OldBrush;
+	HPEN MyPen, OldPen;
 	HWND MenuWnd;
 	int i;
 
-	static Player* P;
-	static Bullet* B[10];
-	static Enemy* E[MAXENEMY];
 	static int key;
 
 	switch (msg) {
 	case WM_CREATE:
-		P = new Player;
-		for (i = 0; i < MAXENEMY; i++) {
-			E[i] = new Enemy(P);
-			B[i] = new Bullet(P);
-		}
+		srand(time(NULL));
+		for (i = 0; i < MAXENEMY; i++) 	E[i] = new Enemy(&P);
+		for (i = 0; i < 10; i++)	B[i] = new Bullet(P);
 		SetTimer(hwnd, 1, 20, NULL);
 		return 0;
 
@@ -78,14 +77,19 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 			if (!E[i]->GetExist()) continue;
 			E[i]->Move();
 		}
+		for (i = 0; i < MAXENEMY; i++) {
+			for (int j = 0; j < 10; j++) {
+				B[j]->IsCrash(E[i]);
+			}
+		}
 		InvalidateRect(hwnd, NULL, TRUE);
 		return 0;
 
 	case WM_KEYDOWN:
 		key = LOWORD(wParam);
-		P->Move(key);
+		P.Move(key);
 		for (i = 0; i < 10; i++) {
-			if (B[i]->getExist() == false) { B[i]->Make(key, key); break; }
+			if (B[i]->getExist() == false) { B[i]->Make(key, key, P); break; }
 		}
 		InvalidateRect(hwnd, NULL, TRUE);
 		return 0;
@@ -94,7 +98,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		//P->Draw(hwnd);
 		hdc = BeginPaint(hwnd, &ps);
 
-		Rectangle(hdc, P->GetX(), P->GetY(), P->GetX() + 10, P->GetY() + 10);
+		Rectangle(hdc, P.GetX(), P.GetY(), P.GetX() + 10, P.GetY() + 10);
 		MyBrush = CreateSolidBrush(RGB(255, 0, 0));
 		OldBrush = (HBRUSH)SelectObject(hdc, MyBrush);
 		for (i = 0; i < MAXENEMY; i++) {
@@ -104,18 +108,21 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		DeleteObject(SelectObject(hdc, OldBrush));
 		MyBrush = CreateSolidBrush(RGB(0, 0, 255));
 		OldBrush = (HBRUSH)SelectObject(hdc, MyBrush);
+		MyPen = CreatePen(PS_NULL, 0, NULL);
+		OldPen = (HPEN)SelectObject(hdc, MyPen);
 		for (i = 0; i < 10; i++) {
 			if (!B[i]->getExist()) continue;
-			B[i]->Move();
-			Rectangle(hdc, B[i]->GetX(), B[i]->GetY(), B[i]->GetX() + 10, B[i]->GetY() + 10);
+			B[i]->Move(P);
+			Ellipse(hdc, B[i]->GetX(), B[i]->GetY(), B[i]->GetX() + 10, B[i]->GetY() + 10);
 		}
 		DeleteObject(SelectObject(hdc, OldBrush));
+		DeleteObject(SelectObject(hdc, OldPen));
 		EndPaint(hwnd, &ps);
 		return 0;
 
 	case WM_DESTROY:
-		delete P;
-		for (i = 0; i < 10; i++) delete E[i];
+		for (i = 0; i < MAXENEMY; i++) delete E[i];
+		for (i = 0; i < 10; i++)	delete B[i];
 		KillTimer(hwnd, 1);
 		PostQuitMessage(0);
 		return 0;

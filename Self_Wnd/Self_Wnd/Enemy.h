@@ -1,13 +1,12 @@
 #pragma once
 #include "Player.h"
-#include "Bullet.h"
 class Enemy{
 protected:
 	bool exist;
 	int m_x, m_y;
 	int m_dx, m_dy;
 	int m_nStay, m_nFrame;
-	const Player* m_pPlayer;
+	Player* m_pPlayer;
 	
 public:
 	Enemy(Player* pPlayer);

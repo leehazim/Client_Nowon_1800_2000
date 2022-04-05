@@ -1,18 +1,20 @@
 #include "Player.h"
 
+int Player::m_x;
+int Player::m_y;
+
 Player::Player(){
 	m_x = 400;
 	m_y = 320;
 	/*m_shape = RECTANGLE;*/
 }
 
-int Player::GetX() const
-{
+int Player::GetX() const {
 	return m_x;
 }
 
-int Player::GetY() const
-{
+int Player::GetY() const{
+
 	return m_y;
 }
 

@@ -2,9 +2,11 @@
 #include <windows.h>
 #include <stdlib.h>
 #include <Math.h>
+#include <time.h>
+
 class Player{
 private:
-	int m_x, m_y;
+	static int m_x, m_y;
 	int direct;
 	/*tag_shape m_shape;*/
 public:

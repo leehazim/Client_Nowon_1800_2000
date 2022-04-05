@@ -1,5 +1,6 @@
 #include "Enemy.h"
-Enemy::Enemy(Player * pPlayer){
+
+Enemy::Enemy(Player* pPlayer){
 	exist = false;
 	m_x = (rand() % 780); 
 	m_y = (rand() % 630);
@@ -7,8 +8,7 @@ Enemy::Enemy(Player * pPlayer){
 	m_pPlayer = pPlayer;
 	m_nStay = m_nFrame = (rand() % 20) + 1;
 
-	if (m_x - m_pPlayer->GetX() > 0) m_x = 780;
-	else m_x = 10;
+	
 	/*if (m_y - m_pPlayer->GetY() > 0) m_y = 630;
 	else m_y = 0;*/
 }

@@ -1,8 +1,12 @@
 #include "Bullet.h"
 
-void Bullet::Make(int key, int playerkey) {
+void Bullet::Make(int key, int playerkey, Player& P) {
 	switch (key) {
-	case VK_SPACE: exist = true; break;
+	case VK_SPACE: 
+		exist = true;
+		m_x = P.GetX();
+		m_y = P.GetY();
+		break;
 	}
 	
 	switch (playerkey) {
@@ -13,17 +17,25 @@ void Bullet::Make(int key, int playerkey) {
 	}
 }
 
-void Bullet::Move() {
+void Bullet::Move(Player& p) {
 	if (--m_nStay == 0) {
 		m_nStay = m_nFrame;
 		m_x += m_dx;
 		m_y += m_dy;
 		count++;
 	}
+
 	if (count == m_range) {
 		exist = false;
-		m_x = pPlayer->GetX();
-		m_y = pPlayer->GetY();
 		count = 0;
+	}
+}
+
+void Bullet::IsCrash(Enemy* E) {
+	int x_range = E->GetX() - m_x; x_range = (x_range > 0) ? x_range : -x_range;
+	int y_range = E->GetY() - m_y; y_range = (y_range > 0) ? y_range : -y_range;
+	if (x_range  < 3 && y_range < 3) {
+		this->exist = false;
+		E->SetExist(false);
 	}
 }
