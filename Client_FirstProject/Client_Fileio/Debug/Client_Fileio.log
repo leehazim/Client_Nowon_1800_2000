@@ -1,0 +1,6 @@
+﻿  main.c
+C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Client_Fileio\main.c(81,20): warning C4013: 'getch'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Client_Fileio\main.c(82,13): warning C4013: 'tolower'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Client_Fileio\main.c(101,8): warning C4013: 'strcpy'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Client_Fileio\main.c(102,9): warning C4013: 'strncpy'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+  Client_Fileio.vcxproj -> C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Debug\Client_Fileio.exe
