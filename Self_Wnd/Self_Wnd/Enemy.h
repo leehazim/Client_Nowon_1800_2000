@@ -15,6 +15,8 @@ public:
 	bool GetExist() { return exist; }
 	int GetX() const { return m_x; }
 	int GetY() const { return m_y; }
+	bool IsCrash(Player* p);
 	void Move();
+	void Draw(HDC);
 };
 

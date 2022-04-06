@@ -50,42 +50,50 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 
 	HDC hdc;
 	PAINTSTRUCT ps;
-	HBRUSH MyBrush, OldBrush;
-	HPEN MyPen, OldPen;
 	HWND MenuWnd;
 	int i;
-
-	static int key;
+	int key;
 
 	switch (msg) {
 	case WM_CREATE:
-		srand(time(NULL));
+		/* 게임 시작시 난수발생기 생성*/
+		srand(time(NULL)); 
+
+		/* 게임 시작과 동시에 적군 만들어질 메모리 확보*/
 		for (i = 0; i < MAXENEMY; i++) 	E[i] = new Enemy(&P);
+
+		/* 총알들 만들어질 자리 확보*/
 		for (i = 0; i < 10; i++)	B[i] = new Bullet(P);
+
 		SetTimer(hwnd, 1, 20, NULL);
 		return 0;
 
-	/*case WM_LBUTTONDOWN:
-		MenuWnd = CreateWindow(MenuClass, MenuClass, WS_POPUP | WS_VISIBLE | WS_CAPTION,
-							   CW_USEDEFAULT, CW_USEDEFAULT, 400, 300, hwnd, (HMENU)NULL,
-							   g_hInst, NULL);
-		return 0;*/
-
 	case WM_TIMER:
+		/* 1000분의 1 확률로 적군 생성*/
 		for (i = 0; i < MAXENEMY; i++) if (!(rand() % 1000)) E[i]->SetExist(true);
+		/* 적군 움직임 신호*/
 		for (i = 0; i < MAXENEMY; i++) {
 			if (!E[i]->GetExist()) continue;
 			E[i]->Move();
 		}
-		for (i = 0; i < MAXENEMY; i++) {
-			for (int j = 0; j < 10; j++) {
-				B[j]->IsCrash(E[i]);
-			}
+
+		for (i = 0; i < 10; i++) {
+			if (!B[i]->getExist()) continue;
+			B[i]->Move(P);
 		}
+		/* 플레이어와 적군 충돌감지*/
+		for (i = 0; i < MAXENEMY; i++) if (E[i]->IsCrash(&P)) SendMessage(hwnd, WM_DESTROY, 0, 0); 
+		
+		/* 총알과 적군 충돌감지*/
+		for (i = 0; i < MAXENEMY; i++) 
+			for (int j = 0; j < 10; j++) B[j]->IsCrash(E[i]);
+			
+		
 		InvalidateRect(hwnd, NULL, TRUE);
 		return 0;
 
 	case WM_KEYDOWN:
+		/* 키 입력으로 플레이어 이동및 총알 방향 설정*/
 		key = LOWORD(wParam);
 		P.Move(key);
 		for (i = 0; i < 10; i++) {
@@ -95,32 +103,25 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		return 0;
 
 	case WM_PAINT:
-		//P->Draw(hwnd);
 		hdc = BeginPaint(hwnd, &ps);
-
-		Rectangle(hdc, P.GetX(), P.GetY(), P.GetX() + 10, P.GetY() + 10);
-		MyBrush = CreateSolidBrush(RGB(255, 0, 0));
-		OldBrush = (HBRUSH)SelectObject(hdc, MyBrush);
+		/* 키 입력시마다 좌표 다시 검사해서 플레이어 그리기*/
+		P.Draw(hdc);
+		
+		/* wm_timer 발생시마다 적군들의 좌표들을 다시 받아서 다시 그림*/
 		for (i = 0; i < MAXENEMY; i++) {
 			if (!E[i]->GetExist()) continue;
-			Rectangle(hdc, E[i]->GetX(), E[i]->GetY(), E[i]->GetX() + 10, E[i]->GetY() + 10);
+			E[i]->Draw(hdc);
 		}
-		DeleteObject(SelectObject(hdc, OldBrush));
-		MyBrush = CreateSolidBrush(RGB(0, 0, 255));
-		OldBrush = (HBRUSH)SelectObject(hdc, MyBrush);
-		MyPen = CreatePen(PS_NULL, 0, NULL);
-		OldPen = (HPEN)SelectObject(hdc, MyPen);
+		/* WM_TIMER 발생시마다 총알들의 좌표를 다시 받아서 다시 그림*/
 		for (i = 0; i < 10; i++) {
 			if (!B[i]->getExist()) continue;
-			B[i]->Move(P);
-			Ellipse(hdc, B[i]->GetX(), B[i]->GetY(), B[i]->GetX() + 10, B[i]->GetY() + 10);
+			B[i]->Draw(hdc);	
 		}
-		DeleteObject(SelectObject(hdc, OldBrush));
-		DeleteObject(SelectObject(hdc, OldPen));
 		EndPaint(hwnd, &ps);
 		return 0;
 
 	case WM_DESTROY:
+		/* 확보해 두었던 적군 총알들을 메모리 해제*/
 		for (i = 0; i < MAXENEMY; i++) delete E[i];
 		for (i = 0; i < 10; i++)	delete B[i];
 		KillTimer(hwnd, 1);

@@ -6,6 +6,7 @@ int Player::m_y;
 Player::Player(){
 	m_x = 400;
 	m_y = 320;
+	direct = VK_LEFT;
 	/*m_shape = RECTANGLE;*/
 }
 
@@ -42,11 +43,7 @@ void Player::Move(int key){
 	}
 }
 
-void Player::Draw(HWND hwnd){
-	
-	HDC hdc;
-	PAINTSTRUCT ps;
+void Player::Draw(HDC hdc){
 
-	hdc = BeginPaint(hwnd, &ps);
 	Rectangle(hdc, m_x, m_y, m_x + 10, m_y + 10);
 }
