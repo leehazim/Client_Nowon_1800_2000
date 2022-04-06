@@ -1,0 +1,3 @@
+﻿  Main.c
+C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Client_FileDivision\Main.c(5,5): error C2374: 'count': 재정의. 여러 번 초기화했습니다.
+C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_FirstProject\Client_FileDivision\OperationFuctions.h(5): message : 'count' 선언을 참조하십시오.

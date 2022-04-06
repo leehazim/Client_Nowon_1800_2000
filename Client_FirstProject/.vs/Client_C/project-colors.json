@@ -95,7 +95,17 @@
       "ProjectGuid": "d0c9d5c6-f918-4d1c-be9a-d10998783e43",
       "DisplayName": "Client_Fileio",
       "ColorIndex": 1
+    },
+    "d3dc795b-c294-48ca-b9c6-f40b8559f4cc": {
+      "ProjectGuid": "d3dc795b-c294-48ca-b9c6-f40b8559f4cc",
+      "DisplayName": "Client_FileDivision",
+      "ColorIndex": 2
+    },
+    "0a3f0eea-e0fd-42fe-bce6-7b125e5eda09": {
+      "ProjectGuid": "0a3f0eea-e0fd-42fe-bce6-7b125e5eda09",
+      "DisplayName": "Client_DataStruct",
+      "ColorIndex": 3
     }
   },
-  "NextColorIndex": 2
+  "NextColorIndex": 4
 }
