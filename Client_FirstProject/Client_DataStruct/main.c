@@ -1,5 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <memory.h>
+
+#define TRUE 1
+#define FALSE 0
 
 typedef struct tag_DArray {
 	int* ar;
@@ -18,6 +22,9 @@ void InitArray(int aSize) {
 void Add(int Data); /* 데이터 추가 함수*/
 int Remove(int Data), RemoveAt(int idx); /* 데이터 삭제, 인덱스 삭제함수*/
 void Clear(); /* 배열 해제 함수*/
+void Print();
+int IsExist(int Data);
+
 
 int* Arr;
 int size; /* 현재 저장된 데이터 개수*/
@@ -26,11 +33,13 @@ const int growby = 10; /* 데이터공간 부족시 데이터를 증가시킬 양*/
 int* tmp;
 
 int main(void) {
-	for (int i = 0; i < 11; i++) Add(i);
+	for (int i = 1; i <= 10; i++) Add(i);
 	printf("size = %d, capacity = %d\n", size, capacity);
-	for (int i = 0; i < size; i++) {
-		printf("%d ", Arr[i]);
-	}
+	Print();
+	Remove(11); Print();
+	RemoveAt(4); Print();
+	
+	Clear();
 	return 0;
 }
 
@@ -54,5 +63,34 @@ void Add(int Data) {
 	Arr[size] = Data;
 	size++;
 }
-int Remove(int Data) {}
-int RemoveAt(int idx){}
+int Remove(int Data) {
+	int idx = IsExist(Data);
+	if (RemoveAt(idx) == TRUE) return TRUE;
+	return FALSE;
+}
+
+int RemoveAt(int idx){
+	if (capacity == 0) return FALSE;
+	if (idx > size || idx < 0) return FALSE;
+	for (int i = idx; i < size - 1; i++) Arr[i] = Arr[i + 1];
+	size--;
+	return TRUE;
+}
+
+int IsExist(int Data) {
+	for (int i = 0; i < size; i++) 
+		if (Arr[i] == Data) return i;
+	
+	return -1;
+}
+
+void Clear() {
+	free(Arr);
+	size = 0;
+	capacity = 0;
+}
+
+void Print() {
+	for (int i = 0; i < size; i++) { printf("%d ", Arr[i]); }
+	printf("\n");
+}

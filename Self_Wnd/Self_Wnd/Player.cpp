@@ -3,9 +3,9 @@
 int Player::m_x;
 int Player::m_y;
 
-Player::Player(){
+Player::Player() {
 	m_x = 400;
-	m_y = 320;
+	m_y = 340;
 	direct = VK_LEFT;
 	/*m_shape = RECTANGLE;*/
 }

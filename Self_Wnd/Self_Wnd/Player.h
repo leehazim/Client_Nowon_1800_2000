@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <Math.h>
 #include <time.h>
+#include "Pos.h"
 
 class Player{
 private:
@@ -14,7 +15,8 @@ public:
 
 	int GetX() const;
 	int GetY() const;
-	void Move(int key);
+	virtual void Move(int key);
+
 	void Draw(HDC);
 	int GetDirect() const { return direct; }
 	void SetDirect(int key) { direct = key; }

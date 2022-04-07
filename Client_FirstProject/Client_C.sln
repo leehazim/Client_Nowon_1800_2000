@@ -45,6 +45,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Client_FileDivision", "Clie
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Client_DataStructure_DynamicArray", "Client_DataStruct\Client_DataStruct.vcxproj", "{0A3F0EEA-E0FD-42FE-BCE6-7B125E5EDA09}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Client_DataStructure_LinkedList", "Client_DataStructure_LinkedList\Client_DataStructure_LinkedList.vcxproj", "{043EF94A-D461-465C-9D0C-BEFB090C887D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -221,6 +223,14 @@ Global
 		{0A3F0EEA-E0FD-42FE-BCE6-7B125E5EDA09}.Release|x64.Build.0 = Release|x64
 		{0A3F0EEA-E0FD-42FE-BCE6-7B125E5EDA09}.Release|x86.ActiveCfg = Release|Win32
 		{0A3F0EEA-E0FD-42FE-BCE6-7B125E5EDA09}.Release|x86.Build.0 = Release|Win32
+		{043EF94A-D461-465C-9D0C-BEFB090C887D}.Debug|x64.ActiveCfg = Debug|x64
+		{043EF94A-D461-465C-9D0C-BEFB090C887D}.Debug|x64.Build.0 = Debug|x64
+		{043EF94A-D461-465C-9D0C-BEFB090C887D}.Debug|x86.ActiveCfg = Debug|Win32
+		{043EF94A-D461-465C-9D0C-BEFB090C887D}.Debug|x86.Build.0 = Debug|Win32
+		{043EF94A-D461-465C-9D0C-BEFB090C887D}.Release|x64.ActiveCfg = Release|x64
+		{043EF94A-D461-465C-9D0C-BEFB090C887D}.Release|x64.Build.0 = Release|x64
+		{043EF94A-D461-465C-9D0C-BEFB090C887D}.Release|x86.ActiveCfg = Release|Win32
+		{043EF94A-D461-465C-9D0C-BEFB090C887D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
