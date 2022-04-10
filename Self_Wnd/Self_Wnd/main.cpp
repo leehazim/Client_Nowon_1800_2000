@@ -1,7 +1,5 @@
 #include "Bullet.h"
 
-#define MAXENEMY 20
-
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 LRESULT CALLBACK MenuProc(HWND, UINT, WPARAM, LPARAM);
 HINSTANCE g_hInst;
@@ -42,9 +40,10 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR nCmdPar
 		DispatchMessage(&Msg);
 	}
 }
- Player P;
- Bullet* B[10];
- Enemy* E[MAXENEMY];
+const int MAXENEMY = 20;
+Player P;
+Bullet* B[10];
+Enemy* E[MAXENEMY];
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 

@@ -23,7 +23,6 @@ void Bullet::Move(Player& p) {
 	m_y += m_dy;
 	count++;
 
-
 	if (count == m_range) {
 		exist = false;
 		count = 0;
