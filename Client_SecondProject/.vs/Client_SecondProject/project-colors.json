@@ -5,7 +5,12 @@
       "ProjectGuid": "28a9165c-a7f3-42b1-92a1-e82d398c2591",
       "DisplayName": "Client_Class",
       "ColorIndex": 0
+    },
+    "85ba2487-f093-48af-8414-3ac938a9508e": {
+      "ProjectGuid": "85ba2487-f093-48af-8414-3ac938a9508e",
+      "DisplayName": "Client_02_DynamicAlloc(new)",
+      "ColorIndex": 1
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 2
 }
