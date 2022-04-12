@@ -1,10 +1,6 @@
 #include "Enemy.h"
 
-Enemy::Enemy(Player* pPlayer){
-	exist = false;
-	m_x = (rand() % 780); 
-	m_y = (rand() % 630);
-	m_dx = m_dy = 0;
+Enemy::Enemy(Player* pPlayer) : AutoMove(rand() % 780, rand() % 630) {
 	m_pPlayer = pPlayer;
 	m_nStay = m_nFrame = (rand() % 20) + 1;
 
@@ -23,7 +19,7 @@ bool Enemy::IsCrash(Player* p) {
 	return false;
 }
 
-void Enemy::Move() {
+void Enemy::Move(int idx) {
 
 	if (m_pPlayer->GetX() - m_x > 0)	m_dx = +1;
 	else								m_dx = -1;

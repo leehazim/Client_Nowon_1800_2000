@@ -1,10 +1,10 @@
 #pragma once
 #include "Player.h"
-class Enemy{
+#include "AutoMove.h"
+
+class Enemy 
+	: public AutoMove{
 protected:
-	bool exist;
-	int m_x, m_y;
-	int m_dx, m_dy;
 	int m_nStay, m_nFrame;
 	Player* m_pPlayer;
 	
@@ -16,7 +16,7 @@ public:
 	int GetX() const { return m_x; }
 	int GetY() const { return m_y; }
 	bool IsCrash(Player* p);
-	void Move();
+	virtual void Move(int idx = 0);
 	void Draw(HDC);
 };
 

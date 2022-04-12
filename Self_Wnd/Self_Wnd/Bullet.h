@@ -1,25 +1,20 @@
 #pragma once
 #include "Enemy.h"
-class Bullet {
+
+class Bullet 
+	:public AutoMove{
 private:
-	bool exist;
-	int m_x, m_y;
-	int m_dx, m_dy;
 	int m_range;
 	int count;
 	Player& pPlayer;
 
 public:
-	Bullet(Player& apPlayer) : pPlayer(apPlayer) {
-		exist = false;
-		m_x = pPlayer.GetX();
-		m_y = pPlayer.GetY();
+	Bullet(Player& apPlayer) : AutoMove(apPlayer.GetX(), apPlayer.GetY()), pPlayer(apPlayer) {
 		m_range = 100;
-		m_dx = m_dy = 0;
 		count = 0;
 	}
 	void Make(int key, int, Player& P);
-	void Move(Player& p);
+	virtual void Move(Player& p, int idx = 0);
 	void Draw(HDC hdc);
 	void SetExist(bool data) { exist = data; }
 	void IsCrash(Enemy* E);
