@@ -14,13 +14,13 @@ public:
 		count = 0;
 	}
 	void Make(int key, int, Player& P);
-	virtual void Move(Player& p, int idx = 0);
 	void Draw(HDC hdc);
 	void SetExist(bool data) { exist = data; }
 	void IsCrash(Enemy* E);
-	bool getExist() const { return exist; }
 	int GetRange() const { return m_range; }
 	int GetX() { return m_x; }
 	int GetY() { return m_y; }
+	virtual bool GetExist() { return exist; }
+	virtual void Move();
 };
 

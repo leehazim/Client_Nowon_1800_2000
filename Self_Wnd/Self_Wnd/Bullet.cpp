@@ -17,7 +17,7 @@ void Bullet::Make(int key, int playerkey, Player& P) {
 	}
 }
 
-void Bullet::Move(Player& p, int idx) {
+void Bullet::Move() {
 
 	m_x += m_dx;
 	m_y += m_dy;

@@ -16,6 +16,7 @@ public:
 	int GetY() const;
 	void Move(int key);
 
+
 	void Draw(HDC);
 	int GetDirect() const { return direct; }
 	void SetDirect(int key) { direct = key; }

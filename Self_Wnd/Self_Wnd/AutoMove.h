@@ -6,6 +6,7 @@ protected:
 	int m_dx, m_dy;
 public:
 	AutoMove(int x, int y) : m_x(x), m_y(y) { exist = false; m_dx = m_dy = 0; }
-	virtual void Move() {};
+	virtual void Move()= 0;
+	virtual bool GetExist() = 0;
 };
 

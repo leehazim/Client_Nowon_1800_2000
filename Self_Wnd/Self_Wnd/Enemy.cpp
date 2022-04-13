@@ -19,7 +19,7 @@ bool Enemy::IsCrash(Player* p) {
 	return false;
 }
 
-void Enemy::Move(int idx) {
+void Enemy::Move() {
 
 	if (m_pPlayer->GetX() - m_x > 0)	m_dx = +1;
 	else								m_dx = -1;

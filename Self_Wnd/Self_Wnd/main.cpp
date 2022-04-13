@@ -44,6 +44,7 @@ const int MAXENEMY = 20;
 Player P;
 Bullet* B[10];
 Enemy* E[MAXENEMY];
+AutoMove* A[30];
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 
@@ -57,13 +58,15 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	case WM_CREATE:
 		/* 게임 시작시 난수발생기 생성*/
 		srand(time(NULL)); 
-
 		/* 게임 시작과 동시에 적군 만들어질 메모리 확보*/
-		for (i = 0; i < MAXENEMY; i++) 	E[i] = new Enemy(&P);
-
-		/* 총알들 만들어질 자리 확보*/
-		for (i = 0; i < 10; i++)	B[i] = new Bullet(P);
-
+		for (i = 0; i < 30; i++) {
+			if (i < 10) A[i] = new Bullet(P);
+			else A[i] = new Enemy(&P);
+		}
+		/*for (i = 0; i < MAXENEMY; i++) {
+			E[i] = new Enemy(&P);
+			if (i < 10) B[i] = new Bullet(P);
+		}*/
 		SetTimer(hwnd, 1, 20, NULL);
 		return 0;
 
@@ -72,20 +75,29 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		for (i = 0; i < MAXENEMY; i++) if (!(rand() % 1000)) E[i]->SetExist(true);
 		/* 적군 움직임 신호*/
 		for (i = 0; i < MAXENEMY; i++) {
-			if (!E[i]->GetExist()) continue;
+			if (!A[i]->GetExist()) continue;
+			A[i]->Move();
+		/*	if (!E[i]->GetExist()) continue;
 			E[i]->Move();
+			if (i < 10) {
+				if (!B[i]->getExist()) continue;
+				B[i]->Move();
+			}*/
 		}
-
-		for (i = 0; i < 10; i++) {
+		/*for (i = 0; i < 10; i++) {
 			if (!B[i]->getExist()) continue;
-			B[i]->Move(P);
-		}
+			B[i]->Move();
+		}*/
+
 		/* 플레이어와 적군 충돌감지*/
-		for (i = 0; i < MAXENEMY; i++) if (E[i]->IsCrash(&P)) SendMessage(hwnd, WM_DESTROY, 0, 0); 
+		for (i = 0; i < MAXENEMY; i++) {
+			if (E[i]->IsCrash(&P)) SendMessage(hwnd, WM_DESTROY, 0, 0);
+			for (int j = 0; j < 10; j++) B[j]->IsCrash(E[i]);
+		}
 		
 		/* 총알과 적군 충돌감지*/
-		for (i = 0; i < MAXENEMY; i++) 
-			for (int j = 0; j < 10; j++) B[j]->IsCrash(E[i]);
+		/*for (i = 0; i < MAXENEMY; i++) 
+			for (int j = 0; j < 10; j++) B[j]->IsCrash(E[i]);*/
 			
 		
 		InvalidateRect(hwnd, NULL, TRUE);
@@ -96,7 +108,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		key = LOWORD(wParam);
 		P.Move(key);
 		for (i = 0; i < 10; i++) {
-			if (B[i]->getExist() == false) { B[i]->Make(key, key, P); break; }
+			if (B[i]->GetExist() == false) { B[i]->Make(key, key, P); break; }
 		}
 		InvalidateRect(hwnd, NULL, TRUE);
 		return 0;
@@ -107,13 +119,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		P.Draw(hdc);
 		
 		/* wm_timer 발생시마다 적군들의 좌표들을 다시 받아서 다시 그림*/
-		for (i = 0; i < MAXENEMY; i++) {
+		for (i = 10; i < MAXENEMY+10; i++) {
 			if (!E[i]->GetExist()) continue;
 			E[i]->Draw(hdc);
 		}
 		/* WM_TIMER 발생시마다 총알들의 좌표를 다시 받아서 다시 그림*/
 		for (i = 0; i < 10; i++) {
-			if (!B[i]->getExist()) continue;
+			if (!B[i]->GetExist()) continue;
 			B[i]->Draw(hdc);	
 		}
 		EndPaint(hwnd, &ps);

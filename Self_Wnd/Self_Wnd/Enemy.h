@@ -16,7 +16,8 @@ public:
 	int GetX() const { return m_x; }
 	int GetY() const { return m_y; }
 	bool IsCrash(Player* p);
-	virtual void Move(int idx = 0);
 	void Draw(HDC);
+	
+	virtual void Move();
 };
 
