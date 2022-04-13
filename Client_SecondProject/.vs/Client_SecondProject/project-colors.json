@@ -10,7 +10,17 @@
       "ProjectGuid": "85ba2487-f093-48af-8414-3ac938a9508e",
       "DisplayName": "Client_02_DynamicAlloc(new)",
       "ColorIndex": 1
+    },
+    "9a7541cf-6072-4e71-9a4d-8d5c64083f0e": {
+      "ProjectGuid": "9a7541cf-6072-4e71-9a4d-8d5c64083f0e",
+      "DisplayName": "Client_03_String",
+      "ColorIndex": 2
+    },
+    "2048ec10-6666-4b2b-83a9-bfe55db20ff6": {
+      "ProjectGuid": "2048ec10-6666-4b2b-83a9-bfe55db20ff6",
+      "DisplayName": "Client_04_Functions",
+      "ColorIndex": 3
     }
   },
-  "NextColorIndex": 2
+  "NextColorIndex": 4
 }
