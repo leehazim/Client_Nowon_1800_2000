@@ -11,12 +11,12 @@ protected:
 public:
 	Enemy(Player* pPlayer);
 
-	void SetExist(bool Data) { exist = Data; }
+	//void SetExist(bool Data) { exist = Data; }
 	bool GetExist() { return exist; }
 	int GetX() const { return m_x; }
 	int GetY() const { return m_y; }
 	bool IsCrash(Player* p);
-	void Draw(HDC);
+	virtual void Draw(HDC);
 	
 	virtual void Move();
 };

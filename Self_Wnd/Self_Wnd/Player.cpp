@@ -15,7 +15,6 @@ int Player::GetX() const {
 }
 
 int Player::GetY() const{
-
 	return m_y;
 }
 

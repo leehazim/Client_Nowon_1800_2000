@@ -14,7 +14,6 @@ public:
 		count = 0;
 	}
 	void Make(int key, int, Player& P);
-	void Draw(HDC hdc);
 	void SetExist(bool data) { exist = data; }
 	void IsCrash(Enemy* E);
 	int GetRange() const { return m_range; }
@@ -22,5 +21,6 @@ public:
 	int GetY() { return m_y; }
 	virtual bool GetExist() { return exist; }
 	virtual void Move();
+	virtual void Draw(HDC hdc);
 };
 

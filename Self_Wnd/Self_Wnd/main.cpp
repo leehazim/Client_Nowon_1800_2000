@@ -72,33 +72,24 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 
 	case WM_TIMER:
 		/* 1000분의 1 확률로 적군 생성*/
-		for (i = 0; i < MAXENEMY; i++) if (!(rand() % 1000)) E[i]->SetExist(true);
+		for (i = 10; i < MAXENEMY + 10; i++) if (!(rand() % 1000)) A[i]->SetExist(true);
 		/* 적군 움직임 신호*/
-		for (i = 0; i < MAXENEMY; i++) {
+		for (i = 0; i < 30; i++) {
 			if (!A[i]->GetExist()) continue;
 			A[i]->Move();
-		/*	if (!E[i]->GetExist()) continue;
-			E[i]->Move();
-			if (i < 10) {
-				if (!B[i]->getExist()) continue;
-				B[i]->Move();
-			}*/
 		}
-		/*for (i = 0; i < 10; i++) {
-			if (!B[i]->getExist()) continue;
-			B[i]->Move();
-		}*/
-
 		/* 플레이어와 적군 충돌감지*/
-		for (i = 0; i < MAXENEMY; i++) {
-			if (E[i]->IsCrash(&P)) SendMessage(hwnd, WM_DESTROY, 0, 0);
-			for (int j = 0; j < 10; j++) B[j]->IsCrash(E[i]);
+		for (i = 10; i < MAXENEMY + 10; i++) {
+			if (dynamic_cast<Enemy*>(A[i])->IsCrash(&P)) {
+				DestroyWindow(hwnd);
+			}
+			for (int j = 0; j < 10; j++) dynamic_cast<Bullet*>(A[j])->IsCrash(dynamic_cast<Enemy*>(A[i]));
 		}
 		
 		/* 총알과 적군 충돌감지*/
 		/*for (i = 0; i < MAXENEMY; i++) 
-			for (int j = 0; j < 10; j++) B[j]->IsCrash(E[i]);*/
-			
+			for (int j = 0; j < 10; j++) B[j]->IsCrash(E[i]);
+			*/
 		
 		InvalidateRect(hwnd, NULL, TRUE);
 		return 0;
@@ -108,7 +99,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		key = LOWORD(wParam);
 		P.Move(key);
 		for (i = 0; i < 10; i++) {
-			if (B[i]->GetExist() == false) { B[i]->Make(key, key, P); break; }
+			if (A[i]->GetExist() == false) { dynamic_cast<Bullet*>(A[i])->Make(key, key, P); break; }
 		}
 		InvalidateRect(hwnd, NULL, TRUE);
 		return 0;
@@ -120,13 +111,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		
 		/* wm_timer 발생시마다 적군들의 좌표들을 다시 받아서 다시 그림*/
 		for (i = 10; i < MAXENEMY+10; i++) {
-			if (!E[i]->GetExist()) continue;
-			E[i]->Draw(hdc);
+			if (!A[i]->GetExist()) continue;
+			A[i]->Draw(hdc);
 		}
 		/* WM_TIMER 발생시마다 총알들의 좌표를 다시 받아서 다시 그림*/
 		for (i = 0; i < 10; i++) {
-			if (!B[i]->GetExist()) continue;
-			B[i]->Draw(hdc);	
+			if (!A[i]->GetExist()) continue;
+			A[i]->Draw(hdc);	
 		}
 		EndPaint(hwnd, &ps);
 		return 0;
