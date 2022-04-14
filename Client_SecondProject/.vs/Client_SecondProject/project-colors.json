@@ -20,7 +20,17 @@
       "ProjectGuid": "2048ec10-6666-4b2b-83a9-bfe55db20ff6",
       "DisplayName": "Client_04_Functions",
       "ColorIndex": 3
+    },
+    "3207d592-fc41-4ae7-9914-b767aea5da48": {
+      "ProjectGuid": "3207d592-fc41-4ae7-9914-b767aea5da48",
+      "DisplayName": "Client_05_ClassMake",
+      "ColorIndex": 4
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "기타 파일",
+      "ColorIndex": -1
     }
   },
-  "NextColorIndex": 4
+  "NextColorIndex": 5
 }

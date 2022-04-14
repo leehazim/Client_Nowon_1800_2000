@@ -1,0 +1,3 @@
+﻿  main.cpp
+C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_SecondProject\Client_05_ClassMake\main.cpp(66): warning C4172: 지역 변수 또는 임시: tmp의 주소를 반환하고 있습니다.
+  Client_05_ClassMake.vcxproj -> C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_SecondProject\Debug\Client_05_ClassMake.exe
