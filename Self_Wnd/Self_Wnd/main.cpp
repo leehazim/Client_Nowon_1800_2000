@@ -42,8 +42,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR nCmdPar
 }
 const int MAXENEMY = 20;
 Player P;
-Bullet* B[10];
-Enemy* E[MAXENEMY];
 AutoMove* A[30];
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
@@ -63,10 +61,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 			if (i < 10) A[i] = new Bullet(P);
 			else A[i] = new Enemy(&P);
 		}
-		/*for (i = 0; i < MAXENEMY; i++) {
-			E[i] = new Enemy(&P);
-			if (i < 10) B[i] = new Bullet(P);
-		}*/
 		SetTimer(hwnd, 1, 20, NULL);
 		return 0;
 
@@ -80,27 +74,18 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		}
 		/* 플레이어와 적군 충돌감지*/
 		for (i = 10; i < MAXENEMY + 10; i++) {
-			if (dynamic_cast<Enemy*>(A[i])->IsCrash(&P)) {
-				DestroyWindow(hwnd);
-			}
+			if (dynamic_cast<Enemy*>(A[i])->IsCrash(&P)) { SendMessage(hwnd, WM_DESTROY, 0, 0); break;	}
 			for (int j = 0; j < 10; j++) dynamic_cast<Bullet*>(A[j])->IsCrash(dynamic_cast<Enemy*>(A[i]));
 		}
-		
-		/* 총알과 적군 충돌감지*/
-		/*for (i = 0; i < MAXENEMY; i++) 
-			for (int j = 0; j < 10; j++) B[j]->IsCrash(E[i]);
-			*/
 		
 		InvalidateRect(hwnd, NULL, TRUE);
 		return 0;
 
 	case WM_KEYDOWN:
 		/* 키 입력으로 플레이어 이동및 총알 방향 설정*/
-		key = LOWORD(wParam);
-		P.Move(key);
-		for (i = 0; i < 10; i++) {
-			if (A[i]->GetExist() == false) { dynamic_cast<Bullet*>(A[i])->Make(key, key, P); break; }
-		}
+		P.Move(LOWORD(wParam));
+		for (i = 0; i < 10; i++) 
+			if (!A[i]->GetExist()) { dynamic_cast<Bullet*>(A[i])->Make(LOWORD(wParam), P); break; }
 		InvalidateRect(hwnd, NULL, TRUE);
 		return 0;
 
@@ -108,24 +93,17 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		hdc = BeginPaint(hwnd, &ps);
 		/* 키 입력시마다 좌표 다시 검사해서 플레이어 그리기*/
 		P.Draw(hdc);
-		
-		/* wm_timer 발생시마다 적군들의 좌표들을 다시 받아서 다시 그림*/
-		for (i = 10; i < MAXENEMY+10; i++) {
+		/* wm_timer 발생시마다 자동객체들 다시그리기*/
+		for (i = 0; i < 30; i++) {
 			if (!A[i]->GetExist()) continue;
 			A[i]->Draw(hdc);
-		}
-		/* WM_TIMER 발생시마다 총알들의 좌표를 다시 받아서 다시 그림*/
-		for (i = 0; i < 10; i++) {
-			if (!A[i]->GetExist()) continue;
-			A[i]->Draw(hdc);	
 		}
 		EndPaint(hwnd, &ps);
 		return 0;
 
 	case WM_DESTROY:
 		/* 확보해 두었던 적군 총알들을 메모리 해제*/
-		for (i = 0; i < MAXENEMY; i++) delete E[i];
-		for (i = 0; i < 10; i++)	delete B[i];
+		for (i = 0; i < 30; i++) delete A[i];
 		KillTimer(hwnd, 1);
 		PostQuitMessage(0);
 		return 0;

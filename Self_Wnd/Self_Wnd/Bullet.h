@@ -13,7 +13,7 @@ public:
 		m_range = 100;
 		count = 0;
 	}
-	void Make(int key, int, Player& P);
+	void Make(int key, Player& P);
 	void SetExist(bool data) { exist = data; }
 	void IsCrash(Enemy* E);
 	int GetRange() const { return m_range; }

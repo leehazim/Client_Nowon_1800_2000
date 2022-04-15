@@ -1,6 +1,6 @@
 #include "Bullet.h"
 
-void Bullet::Make(int key, int playerkey, Player& P) {
+void Bullet::Make(int key, Player& P) {
 	switch (key) {
 	case VK_SPACE: 
 		exist = true;
@@ -9,7 +9,7 @@ void Bullet::Make(int key, int playerkey, Player& P) {
 		break;
 	}
 	
-	switch (playerkey) {
+	switch (P.GetDirect()) {
 	case VK_LEFT: m_dx = -1; m_dy = 0; break;
 	case VK_RIGHT: m_dx = +1; m_dy = 0; break;
 	case VK_UP: m_dx = 0; m_dy = -1; break;
