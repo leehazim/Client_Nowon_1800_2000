@@ -67,15 +67,17 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	case WM_TIMER:
 		/* 1000분의 1 확률로 적군 생성*/
 		for (i = 10; i < MAXENEMY + 10; i++) if (!(rand() % 1000)) A[i]->SetExist(true);
-		/* 적군 움직임 신호*/
 		for (i = 0; i < 30; i++) {
 			if (!A[i]->GetExist()) continue;
 			A[i]->Move();
 		}
 		/* 플레이어와 적군 충돌감지*/
 		for (i = 10; i < MAXENEMY + 10; i++) {
-			if (dynamic_cast<Enemy*>(A[i])->IsCrash(&P)) { SendMessage(hwnd, WM_DESTROY, 0, 0); break;	}
-			for (int j = 0; j < 10; j++) dynamic_cast<Bullet*>(A[j])->IsCrash(dynamic_cast<Enemy*>(A[i]));
+			if (dynamic_cast<Enemy*>(A[i])->IsCrash(&P)) {  SendMessage(hwnd, WM_DESTROY, 0, 0); break;	}
+			for (int j = 0; j < 10; j++) {
+				if (!A[j]->GetExist()) continue;
+				dynamic_cast<Bullet*>(A[j])->IsCrash(dynamic_cast<Enemy*>(A[i]));
+			}
 		}
 		
 		InvalidateRect(hwnd, NULL, TRUE);
@@ -85,7 +87,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		/* 키 입력으로 플레이어 이동및 총알 방향 설정*/
 		P.Move(LOWORD(wParam));
 		for (i = 0; i < 10; i++) 
-			if (!A[i]->GetExist()) { dynamic_cast<Bullet*>(A[i])->Make(LOWORD(wParam), P); break; }
+			if (!A[i]->GetExist()) { 
+				dynamic_cast<Bullet*>(A[i])->Make(LOWORD(wParam), P); 
+				break; 
+			}
 		InvalidateRect(hwnd, NULL, TRUE);
 		return 0;
 
@@ -128,9 +133,7 @@ LRESULT CALLBACK MenuProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		}
 		return 0;
 
-	case WM_DESTROY:
-		DestroyWindow(hwnd);
-		return 0;
+	case WM_DESTROY: DestroyWindow(hwnd); return 0;
 	}
 
 	return DefWindowProc(hwnd, msg, wParam, lParam);

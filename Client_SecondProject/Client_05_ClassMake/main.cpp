@@ -82,17 +82,17 @@ int main(void) {
 	Coord coord3 = coord1 = *coord2Ptr; 
 	/*디폴트 대입연산자가 정의되어있기 때문에 가능하다. 멤버메소드도 가지고 있는데 대입이 되는 이유는 모든 객체가 메소드를 가지는게 아니라
 	클래스의 메소드들이 저장된 포인터를 가지고있다고 보는게 더 타당할 것이다.*/
-	cout << "(" << coord1.GetX() << "," << coord1.GetY() << ")" << endl;
-	cout << "(" << coord3.GetX() << "," << coord3.GetY() << ")" << endl;
+	cout << "coord1 = (" << coord1.GetX() << "," << coord1.GetY() << ")" << endl;
+	cout << "coord3 = (" << coord3.GetX() << "," << coord3.GetY() << ")" << endl;
 
 
 	Coord coord4 = coord3 + coord1;
-	cout << "(" << coord3.GetX() << "," << coord3.GetY() << ")" << " ";
-	cout << "(" << coord4.GetX() << "," << coord4.GetY() << ")" << endl;
+	cout << "coord3 = (" << coord3.GetX() << "," << coord3.GetY() << ")" << " ";
+	cout << "coord4 = (" << coord4.GetX() << "," << coord4.GetY() << ")" << endl;
 
 	coord3 += coord4;
-	cout << "(" << coord3.GetX() << "," << coord3.GetY() << ")" << " ";
-	cout << "(" << coord4.GetX() << "," << coord4.GetY() << ")" << endl;
+	cout << "coord3 = (" << coord3.GetX() << "," << coord3.GetY() << ")" << " ";
+	cout << "coord4 = (" << coord4.GetX() << "," << coord4.GetY() << ")" << endl;
 	delete coord2Ptr;	
  	return 0;
 }
