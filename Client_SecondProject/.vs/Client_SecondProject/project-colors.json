@@ -35,7 +35,12 @@
       "ProjectGuid": "b544f132-874f-4826-93be-ea7d91089f5b",
       "DisplayName": "Client_06_ClassFormat",
       "ColorIndex": 5
+    },
+    "ade9943c-a923-4ecd-8e32-ddbe7236a0ba": {
+      "ProjectGuid": "ade9943c-a923-4ecd-8e32-ddbe7236a0ba",
+      "DisplayName": "Client_07_DArray",
+      "ColorIndex": 6
     }
   },
-  "NextColorIndex": 6
+  "NextColorIndex": 7
 }

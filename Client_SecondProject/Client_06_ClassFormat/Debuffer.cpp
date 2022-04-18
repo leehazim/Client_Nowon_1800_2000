@@ -14,14 +14,12 @@ Debuffer::Debuffer(const char* name)
 Debuffer::Debuffer(Warrior& target) 
 	: Damage(10) {	DecreaseHP(target); }
 
-Debuffer::Debuffer(const Debuffer& Other) {
-	*this = Other;
-}
-
+Debuffer::Debuffer(const Debuffer& Other) { *this = Other; }
 Debuffer::~Debuffer() { delete[] Name; }
 
 Debuffer& Debuffer::operator=(const Debuffer& Other) {
 	Damage = Other.Damage;
+	if (Name != nullptr)delete[] Name;
 	Name = new char[strlen(Other.Name) + 1];
 	strcpy(Name, Other.Name);
 	return *this;
