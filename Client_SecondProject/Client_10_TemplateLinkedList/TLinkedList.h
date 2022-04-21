@@ -21,14 +21,17 @@ public:
 
 	bool AddFirst(T data);
 	bool AddLast(T data);
-	bool AddBefore(tag_node<T>* node, T data);
-	bool AddAfter(tag_node<T>* node, T data);
+	/*bool AddBefore(tag_node<T>* node, T data);*/
+	/*bool AddAfter(tag_node<T>* node, T data);*/
+	bool AddBefore(T target, T item);
+	bool AddAfter(T target, T data);
+	bool AddBefore(tag_node<T>& target, T item);
+	bool AddAfter(tag_node<T>& target, T data);
 
-	tag_node<T>* First();
-	tag_node<T>* Last();
 	tag_node<T>* Find(T data);
 	tag_node<T>* FindLast(T data);
 	bool Remove(T data);
+	bool RemoveLast(T data);
 	void Print();
 	void PrintData(int data);
 };
@@ -41,35 +44,32 @@ inline TLinkedList<T>::TLinkedList() {
 }
 
 template<typename T>
-inline TLinkedList<T>::~TLinkedList() { delete head; delete tail; }
+inline TLinkedList<T>::~TLinkedList() { 
+	while (head) {
+		tag_node<int>* tmp = head;
+		head = head->next;
+		delete tmp;
+	}
+}
 
 template<typename T>
 bool TLinkedList<T>::AddFirst(T data) {
 	tag_node<T>* tmp = new tag_node<T>;
-	if (tmp == nullptr) return false;
+	if (tmp == nullptr) return false; /* 동적할당에 실패하면 false리턴*/
 
-	tmp->data = data;
-	if (head != nullptr) {
-		tmp->next = head->next;
+	if (head->next == nullptr) tmp->prev = head;
+	else {
+		head->next->prev = tmp;
 		tmp->prev = head;
 	}
-
-	if (tail == nullptr) {
-		tail = tmp;
-	}
-	head = tmp;
-	if (head == nullptr) { tmp->next = nullptr; tmp->prev = head; }
-	//head = tmp;
-	tmp->data = data;
-
 	tmp->next = head->next;
 	head->next = tmp;
-	tmp->prev = head;
-	if (tail == head) tail = tmp;
-	else while (tmp->next) {
-		tail = tmp;
-		tmp = tmp->next;
-	}
+	tmp->data = data; /* 노드에 데이터 삽입*/
+	
+	if (head == tail) tail = tmp;
+	tmp = head;
+	while (tmp->next) {	tmp = tmp->next; }
+	tail = tmp;
 	return true;
 }
 
@@ -88,38 +88,57 @@ bool TLinkedList<T>::AddLast(T data) {
 }
 
 template<typename T>
-inline bool TLinkedList<T>::AddBefore(tag_node<T>* node, T data) {
-	tag_node<T>* tmp = new tag_node<T>;
-	tag_node<T>* tmp2 = node->prev;
+inline bool TLinkedList<T>::AddBefore(T target, T item) {
+	tag_node<T>* tmp = Find(target);
 	if (tmp == nullptr) return false;
-	
-	//tmp2->next = tmp; 
-	//tmp->prev = tmp2;
-	//tmp->next = node;
-	//node->prev = tmp;
+	tag_node<T>* tmp2 = new tag_node<T>;
 
-	tmp->data = data;
-	node->prev->next = tmp;
-	tmp->prev = node->prev;
-	node->prev = tmp;
-	tmp->next = node;
+	if (tmp->prev == nullptr) {
+		AddFirst(item);
+		delete tmp2;
+		return true;
+	}
+
+	tmp2->data = item;
+	tmp2->next = tmp;
+	tmp2->prev = tmp->prev;
+	tmp->prev->next = tmp2;
+	tmp->prev = tmp2;
+
+	return true;
+}
+
+template<typename T>
+inline bool TLinkedList<T>::AddAfter(T target, T data) {
+	tag_node<T>* tmp = Find(target);
+	if (tmp == nullptr) return false;
+	tag_node<T>* tmp2 = new tag_node<T>;
+
+	if (tmp->next == nullptr) {
+		AddLast(data);
+		delete tmp2;
+		return true;
+	}
+
+	tmp->next->prev = tmp2;
+	tmp2->next = tmp->next;
+	tmp->next = tmp2;
+	tmp2->prev = tmp;
+	tmp2->data = data;
 	
 	return true;
 }
 
 template<typename T>
-inline bool TLinkedList<T>::AddAfter(tag_node<T>* node, T data) {
+inline bool TLinkedList<T>::AddBefore(tag_node<T>& target, T item) {
+	if (AddBefore(target.data, item)) return true;
 	return false;
 }
 
 template<typename T>
-inline tag_node<T>* TLinkedList<T>::First() {
-	// TODO: 여기에 return 문을 삽입합니다.
-}
-
-template<typename T>
-inline tag_node<T>* TLinkedList<T>::Last() {
-	// TODO: 여기에 return 문을 삽입합니다.
+inline bool TLinkedList<T>::AddAfter(tag_node<T>& target, T data) {
+	if(AddAfter(target.data, data)) return true; 
+	return false;
 }
 
 template<typename T>
@@ -145,31 +164,22 @@ inline tag_node<T>* TLinkedList<T>::FindLast(T data) {
 template<typename T>
 inline bool TLinkedList<T>::Remove(T data) {
 	
-	tag_node<T>* tmp = head;
-	while (tmp) {
-		if (tmp->data == data) break;
-		tmp = tmp->next;
-	}
-
+	tag_node<T>* tmp = Find(data);
 	if (tmp == nullptr) return false;
 
-	if (tmp == head) {
-		tmp = head->next;
-		delete head;
-		head = tmp;
-		return true;
-	}
+	if(tmp->prev != nullptr) tmp->prev->next = tmp->next;
+	if(tmp->next != nullptr) tmp->next->prev = tmp->prev;
+	delete tmp;
+	return true;
+}
 
-	if (tmp == tail) {
-		tmp = tail->prev;
-		tail->prev->next = nullptr;
-		delete tail;
-		tail = tmp;
-	}
+template<typename T>
+inline bool TLinkedList<T>::RemoveLast(T data) {
+	tag_node<T>* tmp = FindLast(data);
+	if (tmp == nullptr) return false;
 
-	tag_node<T>* tmp2 = tmp->prev;
-	tmp->prev->next = tmp->next;
-	tmp->next->prev = tmp2;
+	if (tmp->prev != nullptr) tmp->prev->next = tmp->next;
+	if (tmp->next != nullptr) tmp->next->prev = tmp->prev;
 	delete tmp;
 	return true;
 }

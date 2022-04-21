@@ -5,19 +5,17 @@
 int main(void) {
 
 	TLinkedList<int> list;
-	list.AddFirst(10);
-	list.AddFirst(11);
-	list.AddFirst(12);
-	list.AddLast(111);
-	list.AddLast(12);
-	list.AddLast(13);
+	list.AddLast(1);
+	list.AddLast(2);
+	list.AddLast(5);
+	list.AddLast(3);
+	list.AddLast(4);
+	list.AddLast(5);
+	list.AddLast(3);
+	list.AddLast(2);
+	list.AddLast(1);
 	list.Print();
-	//list.PrintData(11);
-	list.Remove(111);
+	list.Remove(5);
 	list.Print();
-	tag_node<int>* tmp = list.Find(10);
-	list.AddBefore(tmp, 15);
-	list.Print();
-	delete tmp;
 	return 0;
 }
