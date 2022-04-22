@@ -55,7 +55,12 @@
       "ProjectGuid": "d46853b5-fe64-4db7-aa29-9f1dffef6289",
       "DisplayName": "Client_10_TemplateLinkedList",
       "ColorIndex": 9
+    },
+    "55c70973-077c-409a-8adb-02090cedc622": {
+      "ProjectGuid": "55c70973-077c-409a-8adb-02090cedc622",
+      "DisplayName": "Client_11_BinaryTree",
+      "ColorIndex": 10
     }
   },
-  "NextColorIndex": 10
+  "NextColorIndex": 11
 }
