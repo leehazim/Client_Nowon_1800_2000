@@ -14,6 +14,7 @@ struct Node {
 	int m_Data;
 	Node* m_Left;
 	Node* m_Right;
+	
 };
 enum { LEFT = 1, RIGHT };
 
@@ -21,7 +22,7 @@ class BinaryTree {
 private:
 	Node* m_Root, *m_Tmp, *m_PTmp;
 
-	Node& FindLeaf(Node* start);
+	Node& FindLeftLeaf(Node* start);
 
 public:
 	BinaryTree();

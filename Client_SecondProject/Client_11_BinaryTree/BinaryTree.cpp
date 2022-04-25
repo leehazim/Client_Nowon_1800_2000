@@ -1,13 +1,15 @@
 #include "BinaryTree.h"
 #include <iostream>
 
-Node& BinaryTree::FindLeaf(Node* start) {
+Node& BinaryTree::FindLeftLeaf(Node* start) {
+	
 	Node* leaf = start;
+	Node* leafParent = nullptr;
 	while (leaf->m_Left != nullptr) {
+		leafParent = leaf;
 		leaf = leaf->m_Left;
 	}
-	if (leaf->m_Right != nullptr) leaf = &FindLeaf(leaf->m_Right);
-	
+	leafParent->m_Left = leaf->m_Right;
 	return *leaf;
 }
 
@@ -90,29 +92,32 @@ bool BinaryTree::Remove(int Value) {
 			m_Tmp = m_Tmp->m_Right;
 		}
 	}
+
 	if (m_Tmp == nullptr) { return false; }
 
 	/* 삭제할 대상 노드가 자식이 없는 경우*/
 	if ((m_Tmp->m_Left == nullptr) && (m_Tmp->m_Right == nullptr)) {
 		if (m_PTmp != nullptr) {
 			if (dir == LEFT)	m_PTmp->m_Left = nullptr;
-			if (dir == RIGHT)	m_PTmp->m_Right = nullptr;
+			else				m_PTmp->m_Right = nullptr;
 		}
 		delete m_Tmp; m_Tmp = nullptr; return true;
 	}
+	/* 삭제하려는 노드가 오른쪽 노드를 가지고 있으면*/
 	else if (m_Tmp->m_Left == nullptr) {
 		if (dir == LEFT)	m_PTmp->m_Left = m_Tmp->m_Right;
 		else				m_PTmp->m_Right = m_Tmp->m_Right;
 		delete m_Tmp; m_Tmp = nullptr; return true;
 	}
+	/* 삭제하려는 노드가 왼쪽 노드를 가지고 있으면*/
 	else if(m_Tmp->m_Right == nullptr) {
 		if (dir == LEFT)	m_PTmp->m_Left = m_Tmp->m_Left;
 		else				m_PTmp->m_Right = m_Tmp->m_Left;
 		delete m_Tmp; m_Tmp = nullptr; return true;
 	}
 	else {
-		Node* Leaf = m_Tmp->m_Right;
-		if(Leaf->m_Left == nullptr)
-
+		Node* leaf = &FindLeftLeaf(m_Tmp->m_Right);
+		m_Tmp->m_Data = leaf->m_Data;
+		delete leaf; return true;
 	}
 }

@@ -60,7 +60,12 @@
       "ProjectGuid": "55c70973-077c-409a-8adb-02090cedc622",
       "DisplayName": "Client_11_BinaryTree",
       "ColorIndex": 10
+    },
+    "3f12af56-205a-4905-ba71-51a1a1e6b329": {
+      "ProjectGuid": "3f12af56-205a-4905-ba71-51a1a1e6b329",
+      "DisplayName": "Client_12_HashTable",
+      "ColorIndex": 11
     }
   },
-  "NextColorIndex": 11
+  "NextColorIndex": 12
 }
