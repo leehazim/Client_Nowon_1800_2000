@@ -12,3 +12,16 @@
 1. 모듈러 방식 사용
 */
 #include <iostream>
+#include "HashTable.h"
+using namespace std;
+
+int main(void) {
+	HashTable* HT = new HashTable();
+	HT->Add("joshua");
+	HT->Add("mose");
+	HT->Add("ojshua");
+	cout << HT->ContainsValue("joshua") << endl;
+	HT->PrintKey("joshua");
+	HT->PrintKey("mose");
+	return 0;
+}

@@ -10,7 +10,7 @@ struct tag_node {
 	
 template<typename T>
 class TLinkedList {
-private:
+public:
 	tag_node<T>* head;
 	tag_node<T>* tail;
 
@@ -33,7 +33,9 @@ public:
 	bool Remove(T data);
 	bool RemoveLast(T data);
 	void Print();
-	void PrintData(int data);
+	void PrintData(T data);
+	int Count();
+	void Delete();
 	/*bool operator==(void * tmp) { return head == tmp; }*/
 };
 
@@ -47,7 +49,7 @@ inline TLinkedList<T>::TLinkedList() {
 template<typename T>
 inline TLinkedList<T>::~TLinkedList() { 
 	while (head) {
-		tag_node<int>* tmp = head;
+		tag_node<T>* tmp = head;
 		head = head->next;
 		delete tmp;
 	}
@@ -78,6 +80,10 @@ template<typename T>
 bool TLinkedList<T>::AddLast(T data) {
 	tag_node<T>* tmp = new tag_node<T>;
 	if (tmp == nullptr) return false;
+	if (tail == head) {
+		AddFirst(data);
+		return true;
+	}
 
 	tmp->data = data;
 	tail->next = tmp;
@@ -196,8 +202,28 @@ inline void TLinkedList<T>::Print() {
 }
 
 template<typename T>
-inline void TLinkedList<T>::PrintData(int data) {
+inline void TLinkedList<T>::PrintData(T data) {
 	tag_node<T>* tmp = FindLast(data);
 	if (tmp == nullptr) return;
 	std::cout << tmp->data << std::endl;
+}
+
+template<typename T>
+inline int TLinkedList<T>::Count() {
+	int count = 0;
+	tag_node<T>* tmp = head;
+	while (tmp != nullptr) {
+		tmp = tmp->next;
+		count++;
+	}
+	return count;
+}
+
+template<typename T>
+inline void TLinkedList<T>::Delete() {
+	while (head) {
+		tag_node<T>* tmp = head;
+		head = head->next;
+		delete tmp;
+	}
 }
