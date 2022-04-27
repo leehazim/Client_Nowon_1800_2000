@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Self_Wnd", "Self_Wnd\Self_Wnd.vcxproj", "{12F5162E-3C1C-4803-BBBB-3D801551FC41}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Scoban", "Scoban\Scoban.vcxproj", "{26DAC2DF-1C21-4137-A759-7DCF0F15092B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{12F5162E-3C1C-4803-BBBB-3D801551FC41}.Release|x64.Build.0 = Release|x64
 		{12F5162E-3C1C-4803-BBBB-3D801551FC41}.Release|x86.ActiveCfg = Release|Win32
 		{12F5162E-3C1C-4803-BBBB-3D801551FC41}.Release|x86.Build.0 = Release|Win32
+		{26DAC2DF-1C21-4137-A759-7DCF0F15092B}.Debug|x64.ActiveCfg = Debug|x64
+		{26DAC2DF-1C21-4137-A759-7DCF0F15092B}.Debug|x64.Build.0 = Debug|x64
+		{26DAC2DF-1C21-4137-A759-7DCF0F15092B}.Debug|x86.ActiveCfg = Debug|Win32
+		{26DAC2DF-1C21-4137-A759-7DCF0F15092B}.Debug|x86.Build.0 = Debug|Win32
+		{26DAC2DF-1C21-4137-A759-7DCF0F15092B}.Release|x64.ActiveCfg = Release|x64
+		{26DAC2DF-1C21-4137-A759-7DCF0F15092B}.Release|x64.Build.0 = Release|x64
+		{26DAC2DF-1C21-4137-A759-7DCF0F15092B}.Release|x86.ActiveCfg = Release|Win32
+		{26DAC2DF-1C21-4137-A759-7DCF0F15092B}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
