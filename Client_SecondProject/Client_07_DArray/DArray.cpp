@@ -4,7 +4,7 @@
 DArray::DArray() : DEFAULT_SIZE(1) {
 	Length = 0;
 	Capacity = DEFAULT_SIZE;
-	Arr = new int[DEFAULT_SIZE];
+	Arr = new int[Capacity];
 }
 	
 DArray::DArray(int size) : DEFAULT_SIZE(10) {

@@ -9,8 +9,7 @@ HashTable::HashTable()
 }
 
 HashTable::~HashTable() {
-	Clear();
-	delete _bucket;
+	Delete();
 }
 
 void HashTable::Add(string data) {
@@ -27,8 +26,7 @@ bool HashTable::ContainsKey(string value) {
 bool HashTable::ContainsKey(int key) {
 	if (_bucket[key] == nullptr || key >= DEFAULT_SIZE) 
 		return false;
-	else
-		return true;
+	else return true;
 }
 
 bool HashTable::ContainsValue(string value) {
@@ -86,6 +84,7 @@ void HashTable::PrintKey(string data) {
 
 int HashTable::MakeHash(string data) {
 	_tmpHash = 0;
+	/*_tmpHash = atoi(data.c_str());*/
 	for (int i = 0; i < data.length(); i++) _tmpHash += data[i];
 	_tmpHash %= DEFAULT_SIZE;
 	return _tmpHash;
