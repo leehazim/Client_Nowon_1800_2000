@@ -1,9 +1,48 @@
 #include <Windows.h>
 #include "resource.h"
+/* 위도우용 변수들*/
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 LPCTSTR lpszClass = TEXT("Scoban");
 HINSTANCE g_hInst;
 HWND g_hWnd;
+
+/* 게임 로직용 변수들*/
+int MemMap[MAX_HEIGHT][MAX_WIDTH];
+HBITMAP hBitWall, hBitBox, hBitMan;
+HBITMAP hBitObject[4];
+enum { WALL, BOX, MAN, WAY };
+const int stage = 3;
+
+int px, py;
+
+int Map[stage][MAX_HEIGHT][MAX_WIDTH] = {
+	{
+	{0,0,0,0,0,0,0,0,0,0},
+	{0,0,0,0,0,0,0,0,0,0},
+	{0,0,0,0,0,0,0,0,0,0},
+	{0,0,0,0,0,0,0,0,0,0},
+	{0,0,0,0,0,0,0,0,0,0},
+	{0,0,0,0,0,0,0,0,0,0},
+	{0,0,0,0,0,0,0,0,0,0},
+	{0,0,0,0,0,0,0,0,0,0},
+	{0,0,0,0,0,2,0,0,0,0},
+	{0,0,0,0,0,0,0,0,0,0},
+	{0,0,0,0,0,0,0,0,0,0},
+	{0,0,0,0,0,0,0,0,0,0},
+	{0,0,0,0,0,0,0,0,0,0},
+	{0,0,0,0,0,0,0,0,0,0},
+	{0,0,0,0,0,0,0,0,0,0}
+	}
+};
+
+/* 비트맵 관련 함수*/
+void DrawBitmap(HDC hdc, int x, int y, HBITMAP hBit);
+void InitBitmap();
+void DestroyBitmap();
+
+void CheckPlayerPos();
+void Move(int key);
+
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hRrevInstance, LPSTR lpszCmdParam, int nCmdShow) {
 
@@ -35,31 +74,87 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hRrevInstance, LPSTR lpszCmd
 	}
 	return (int)Message.wParam;
 }
-int Map[MAX_WIDTH][MAX_HEIGHT];
-HBITMAP hBitWall, hBitBox, hBitMan;
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT iMessage, WPARAM wParam, LPARAM lParam) {
 
 	int x, y;
 	BITMAP bit;
+	HDC hdc; PAINTSTRUCT ps;
+
 	switch (iMessage) {	
 	case WM_CREATE:
 		g_hWnd = hwnd;
-		hBitWall = LoadBitmap(g_hInst, MAKEINTRESOURCE(IDB_WALL));
-		hBitBox = LoadBitmap(g_hInst, MAKEINTRESOURCE(IDB_BOX));
-		hBitMan = LoadBitmap(g_hInst, MAKEINTRESOURCE(IDB_MAN));
-		GetObject(hBitWall, sizeof(BITMAP), &bit);
+		InitBitmap();
+		GetObject(hBitObject[0], sizeof(BITMAP), &bit);
 		x = bit.bmWidth;
 		y = bit.bmHeight;
-		SetWindowPos(hwnd, NULL, 0, 0, x * MAX_WIDTH * 2, y * MAX_HEIGHT, SWP_NOMOVE);
+		SetWindowPos(hwnd, NULL, 0, 0, x * MAX_WIDTH * 2, (y+3) * MAX_HEIGHT, SWP_NOMOVE);
+		return 0;
+
+	case WM_PAINT:
+		hdc = BeginPaint(hwnd, &ps);
+		for (int i = 0; i < MAX_WIDTH; i++) {
+			for (int j = 0; j < MAX_HEIGHT; j++) {
+				DrawBitmap(hdc, i*32, j *32, hBitObject[Map[0][j][i]]);
+			}
+		}
+		EndPaint(hwnd, &ps);
 		return 0;
 
 	case WM_DESTROY:
-		DeleteObject(hBitWall);
-		DeleteObject(hBitBox);
-		DeleteObject(hBitMan);
+		DestroyBitmap();
 		PostQuitMessage(0);
 		return 0;
 	}
 	return DefWindowProc(hwnd, iMessage, wParam, lParam);
+}
+
+void DrawBitmap(HDC hdc, int x, int y, HBITMAP hBit) {
+	HDC MemDC;
+	HBITMAP OldBitmap;
+	BITMAP bit;
+	int bx, by;
+	
+	if (hBit == NULL) return;
+
+	MemDC = CreateCompatibleDC(hdc);
+	OldBitmap = (HBITMAP)SelectObject(MemDC, hBit);
+	GetObject(hBit, sizeof(BITMAP), &bit);
+	bx = bit.bmWidth;
+	by = bit.bmHeight;
+	BitBlt(hdc, x, y, bx, by, MemDC, 0, 0, SRCCOPY);
+	
+	SelectObject(MemDC, OldBitmap);
+	DeleteDC(MemDC);
+}
+
+void InitBitmap() {
+	hBitObject[WALL] = LoadBitmap(g_hInst, MAKEINTRESOURCE(IDB_WALL));
+	hBitObject[BOX] = LoadBitmap(g_hInst, MAKEINTRESOURCE(IDB_BOX));
+	hBitObject[MAN] = LoadBitmap(g_hInst, MAKEINTRESOURCE(IDB_MAN));
+	hBitObject[WAY] = NULL;
+}
+
+void DestroyBitmap() {
+	DeleteObject(hBitObject[WALL]);
+	DeleteObject(hBitObject[BOX]);
+	DeleteObject(hBitObject[MAN]);
+}
+
+void CheckPlayerPos() {
+	for (int i = 0; i < MAX_WIDTH; i++) {
+		for (int j = 0; j < MAX_HEIGHT; j++) {
+			if (Map[0][j][i] == 2) {
+				px = i;
+				py = j;
+			}
+		}
+	 }
+}
+
+void Move(int key) {
+	switch (key) {
+	case VK_LEFT:
+		
+	}
 }
