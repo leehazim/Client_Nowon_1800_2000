@@ -65,7 +65,12 @@
       "ProjectGuid": "3f12af56-205a-4905-ba71-51a1a1e6b329",
       "DisplayName": "Client_12_HashTable",
       "ColorIndex": 11
+    },
+    "dd714a16-b889-4a06-b003-c5658baf226e": {
+      "ProjectGuid": "dd714a16-b889-4a06-b003-c5658baf226e",
+      "DisplayName": "Client_13_Inheritance",
+      "ColorIndex": 12
     }
   },
-  "NextColorIndex": 12
+  "NextColorIndex": 13
 }
