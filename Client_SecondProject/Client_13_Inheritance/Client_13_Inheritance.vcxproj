@@ -139,16 +139,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BHuman.cpp" />
     <ClCompile Include="Creature.cpp" />
     <ClCompile Include="Dog.cpp" />
     <ClCompile Include="Human.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="WHuman.cpp" />
+    <ClCompile Include="YHuman.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Client_09_TemplateDArray\TDArray.h" />
+    <ClInclude Include="BHuman.h" />
     <ClInclude Include="Creature.h" />
     <ClInclude Include="Dog.h" />
     <ClInclude Include="Human.h" />
+    <ClInclude Include="ITwoLeggedWalker.h" />
+    <ClInclude Include="WHuman.h" />
+    <ClInclude Include="YHuman.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

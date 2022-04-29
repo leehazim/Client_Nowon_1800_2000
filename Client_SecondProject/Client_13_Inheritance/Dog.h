@@ -6,5 +6,6 @@ public:
 	int tailLength;
 public:
 	void Bite(Creature* Target);
+	virtual void Grow();
 };
 

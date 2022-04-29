@@ -13,6 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="소스 파일\Human">
+      <UniqueIdentifier>{abb8c537-67d8-4fa9-aa56-fb4529c79471}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Human">
+      <UniqueIdentifier>{d349b941-737e-4ada-be0e-ae22b797912c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Interface">
+      <UniqueIdentifier>{1b2a94d6-e416-4d7a-acd7-b967c424e5bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -24,8 +33,17 @@
     <ClCompile Include="Dog.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="BHuman.cpp">
+      <Filter>소스 파일\Human</Filter>
+    </ClCompile>
+    <ClCompile Include="YHuman.cpp">
+      <Filter>소스 파일\Human</Filter>
+    </ClCompile>
+    <ClCompile Include="WHuman.cpp">
+      <Filter>소스 파일\Human</Filter>
+    </ClCompile>
     <ClCompile Include="Human.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\Human</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -35,11 +53,23 @@
     <ClInclude Include="Dog.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Human.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="..\Client_09_TemplateDArray\TDArray.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="BHuman.h">
+      <Filter>헤더 파일\Human</Filter>
+    </ClInclude>
+    <ClInclude Include="Human.h">
+      <Filter>헤더 파일\Human</Filter>
+    </ClInclude>
+    <ClInclude Include="WHuman.h">
+      <Filter>헤더 파일\Human</Filter>
+    </ClInclude>
+    <ClInclude Include="YHuman.h">
+      <Filter>헤더 파일\Human</Filter>
+    </ClInclude>
+    <ClInclude Include="ITwoLeggedWalker.h">
+      <Filter>헤더 파일\Interface</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
