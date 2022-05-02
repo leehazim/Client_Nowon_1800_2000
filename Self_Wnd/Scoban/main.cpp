@@ -7,40 +7,44 @@ HINSTANCE g_hInst;
 HWND g_hWnd;
 
 /* 게임 로직용 변수들*/
-int MemMap[MAX_HEIGHT][MAX_WIDTH];
-HBITMAP hBitWall, hBitBox, hBitMan;
-HBITMAP hBitObject[4];
-enum { WALL, BOX, MAN, WAY };
+enum tag_tile{ WALL, BOX, MAN, GOAL, WAY };
+HBITMAP hBitObject[5];
 const int stage = 3;
+int px = -1, py = -1;
 
-int px, py;
-
-int Map[stage][MAX_HEIGHT][MAX_WIDTH] = {
+/* 맵 플레이용 배열*/
+int MemMap[MAX_HEIGHT][MAX_WIDTH];
+/* 맵 저장용 배열*/
+ tag_tile Map[stage][MAX_HEIGHT][MAX_WIDTH] = {
 	{
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,2,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0}
+	{WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL},
+	{WALL,WALL,WAY,WAY,GOAL,WAY,WAY,WALL,WALL,WALL},
+	{WALL,WALL,WAY,WAY,BOX,WAY,WAY,WALL,WALL,WALL},
+	{WALL,WALL,WAY,WAY,WAY,WAY,WAY,WALL,WALL,WALL},
+	{WALL,WALL,WAY,WAY,MAN,WAY,WAY,WALL,WALL,WALL},
+	{WALL,WALL,WAY,WAY,WAY,WAY,WAY,WALL,WALL,WALL},
+	{WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL},
+	{WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL},
+	{WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL},
+	{WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL},
+	{WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL},
+	{WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL},
+	{WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL},
+	{WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL},
+	{WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL}
 	}
 };
+
+ void InitWindow();
 
 /* 비트맵 관련 함수*/
 void DrawBitmap(HDC hdc, int x, int y, HBITMAP hBit);
 void InitBitmap();
 void DestroyBitmap();
+void Render(HDC hdc);
 
-void CheckPlayerPos();
+
+void ResetGame();
 void Move(int key);
 
 
@@ -85,19 +89,23 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 	case WM_CREATE:
 		g_hWnd = hwnd;
 		InitBitmap();
-		GetObject(hBitObject[0], sizeof(BITMAP), &bit);
-		x = bit.bmWidth;
-		y = bit.bmHeight;
-		SetWindowPos(hwnd, NULL, 0, 0, x * MAX_WIDTH * 2, (y+3) * MAX_HEIGHT, SWP_NOMOVE);
+		InitWindow();
+		return 0;
+
+	case MESSAGE_START:
+		ResetGame();
+		return 0;
+
+	case WM_KEYDOWN:
+		switch (wParam) {
+		case 'S': SendMessage(hwnd, MESSAGE_START, 0, 0); break;		  
+		}
+		Move(wParam);
 		return 0;
 
 	case WM_PAINT:
 		hdc = BeginPaint(hwnd, &ps);
-		for (int i = 0; i < MAX_WIDTH; i++) {
-			for (int j = 0; j < MAX_HEIGHT; j++) {
-				DrawBitmap(hdc, i*32, j *32, hBitObject[Map[0][j][i]]);
-			}
-		}
+		Render(hdc);
 		EndPaint(hwnd, &ps);
 		return 0;
 
@@ -107,6 +115,16 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		return 0;
 	}
 	return DefWindowProc(hwnd, iMessage, wParam, lParam);
+}
+
+void InitWindow() {
+	int x, y;
+	BITMAP bit;
+
+	GetObject(hBitObject[0], sizeof(BITMAP), &bit);
+	x = bit.bmWidth;
+	y = bit.bmHeight;
+	SetWindowPos(g_hWnd, NULL, 0, 0, x * MAX_WIDTH * 2, (y + 3) * MAX_HEIGHT, SWP_NOMOVE);
 }
 
 void DrawBitmap(HDC hdc, int x, int y, HBITMAP hBit) {
@@ -132,29 +150,43 @@ void InitBitmap() {
 	hBitObject[WALL] = LoadBitmap(g_hInst, MAKEINTRESOURCE(IDB_WALL));
 	hBitObject[BOX] = LoadBitmap(g_hInst, MAKEINTRESOURCE(IDB_BOX));
 	hBitObject[MAN] = LoadBitmap(g_hInst, MAKEINTRESOURCE(IDB_MAN));
+	hBitObject[GOAL] = LoadBitmap(g_hInst, MAKEINTRESOURCE(IDB_GOAL));
 	hBitObject[WAY] = NULL;
 }
 
 void DestroyBitmap() {
-	DeleteObject(hBitObject[WALL]);
-	DeleteObject(hBitObject[BOX]);
-	DeleteObject(hBitObject[MAN]);
+	for (int i = 0; i < 4; i++)  DeleteObject(hBitObject[i]);
+}
+void Render(HDC hdc) {
+	for (int i = 0; i < MAX_WIDTH; i++) {
+		for (int j = 0; j < MAX_HEIGHT; j++) {
+			DrawBitmap(hdc, i * 32, j * 32, hBitObject[MemMap[j][i]]);
+		}
+	}
 }
 
-void CheckPlayerPos() {
+void ResetGame() {
 	for (int i = 0; i < MAX_WIDTH; i++) {
 		for (int j = 0; j < MAX_HEIGHT; j++) {
 			if (Map[0][j][i] == 2) {
 				px = i;
 				py = j;
 			}
+			MemMap[j][i] = Map[0][j][i];
 		}
-	 }
+	}
 }
 
 void Move(int key) {
+	if (px == -1 || py == -1)return;
+	MemMap[py][px] = WAY;
 	switch (key) {
-	case VK_LEFT:
-		
+	case VK_LEFT: px -= 1;	break;
+	case VK_RIGHT:px += 1;	break;
+	case VK_UP:	py -= 1;	break;
+	case VK_DOWN: py += 1;	break;
 	}
+	MemMap[py][px] = MAN;
+
+	InvalidateRect(g_hWnd, NULL, TRUE);
 }

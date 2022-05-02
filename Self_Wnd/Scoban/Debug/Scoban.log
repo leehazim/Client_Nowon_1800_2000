@@ -1,2 +1,5 @@
 ﻿  main.cpp
+C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Self_Wnd\Scoban\main.cpp(85,9): warning C4101: 'bit' :참조되지 않은 지역 변수입니다.
+C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Self_Wnd\Scoban\main.cpp(84,9): warning C4101: 'y' :참조되지 않은 지역 변수입니다.
+C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Self_Wnd\Scoban\main.cpp(84,6): warning C4101: 'x' :참조되지 않은 지역 변수입니다.
   Scoban.vcxproj -> C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Self_Wnd\Debug\Scoban.exe
