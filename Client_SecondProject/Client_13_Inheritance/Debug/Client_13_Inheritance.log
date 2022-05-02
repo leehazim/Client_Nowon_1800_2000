@@ -1,2 +1,9 @@
-﻿  main.cpp
-  Client_13_Inheritance.vcxproj -> C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_SecondProject\Debug\Client_13_Inheritance.exe
+﻿  BHuman.cpp
+  Dog.cpp
+C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_SecondProject\Client_13_Inheritance\Human.h(19,22): error C2061: 구문 오류: 식별자 'Dog'
+  Human.cpp
+  WHuman.cpp
+  YHuman.cpp
+  main.cpp
+C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_SecondProject\Client_13_Inheritance\Human.h(19,22): error C2061: 구문 오류: 식별자 'Dog'
+  코드를 생성하고 있습니다...

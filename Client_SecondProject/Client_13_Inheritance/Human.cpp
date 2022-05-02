@@ -29,3 +29,7 @@ void Human::Grow() {
 void Human::Walk() {
 	std::cout << "사람이 두발로 걷는다" << std::endl;
 }
+
+void Human::IsDogFollow(Dog& dog) {
+	dog.who = name;
+}

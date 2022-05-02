@@ -31,12 +31,12 @@ int main(void) {
 	//Human* Bm = new BHuman;
 	//Human* Wm = new WHuman;
 
-	Human* humans[99];
+	/*Human* humans[99];
 	for (int i = 0; i < 99; i += 3) {
 		humans[i] = new YHuman;
 		humans[i + 1] = new BHuman;
 		humans[i + 2] = new WHuman;
-	}
+	}*/
 
 	man->WearCloth("√ªπŸ¡ˆ");
 	man->WearCloth("º≈√˜");
@@ -44,15 +44,15 @@ int main(void) {
 	man->WearCloth("¥œ∆Æ");
 	man->WearCloth("¿Â∞©");
 	
-	ITwoLeggedWalker* twoLeggedWalkers[99];
-	for (int i = 0; i < 99; i += 3) {
+	ITwoLeggedWalker* twoLeggedWalkers[12];
+	Creature* hu[12];
+	for (int i = 0; i < 12; i += 3) {
 		twoLeggedWalkers[i] = new YHuman;
 		twoLeggedWalkers[i + 1] = new BHuman;
 		twoLeggedWalkers[i + 2] = new WHuman;
 	}
 
-
-	for (int i = 0; i < 99; i++) {
+	for (int i = 0; i < 12; i++) {
 		twoLeggedWalkers[i]->Walk();
 	}
 
@@ -91,7 +91,8 @@ int main(void) {
 	delete dog1;
 	/*delete creature1;*/
 	delete man;
-	delete humans[0];
+	/*delete hu[11];*/
+	delete twoLeggedWalkers[11];
 	
 	return 0;
 }

@@ -70,7 +70,12 @@
       "ProjectGuid": "dd714a16-b889-4a06-b003-c5658baf226e",
       "DisplayName": "Client_13_Inheritance",
       "ColorIndex": 12
+    },
+    "4f6a4f33-5d9d-42e0-8385-c43abd5b438b": {
+      "ProjectGuid": "4f6a4f33-5d9d-42e0-8385-c43abd5b438b",
+      "DisplayName": "Client_14_SOLIDExample",
+      "ColorIndex": 13
     }
   },
-  "NextColorIndex": 13
+  "NextColorIndex": 14
 }

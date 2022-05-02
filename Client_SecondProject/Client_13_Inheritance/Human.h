@@ -2,6 +2,7 @@
 #include "Creature.h"
 #include "TDArray.h"
 #include "ITwoLeggedWalker.h"
+#include "Dog.h"
 #include <string>
 class Human :
     public Creature, public ITwoLeggedWalker {
@@ -15,4 +16,5 @@ public:
     virtual void Print();
     virtual void Grow();
     virtual void Walk();
+    void IsDogFollow(Dog& dog);
 };
