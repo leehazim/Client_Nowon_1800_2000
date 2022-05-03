@@ -179,14 +179,41 @@ void ResetGame() {
 
 void Move(int key) {
 	if (px == -1 || py == -1)return;
-	MemMap[py][px] = WAY;
+	int dx = 0, dy = 0;
 	switch (key) {
-	case VK_LEFT: px -= 1;	break;
-	case VK_RIGHT:px += 1;	break;
-	case VK_UP:	py -= 1;	break;
-	case VK_DOWN: py += 1;	break;
+	case VK_LEFT: dx = -1;	break;
+	case VK_RIGHT:dx = +1;	break;
+	case VK_UP:	dy = -1;	break;
+	case VK_DOWN: dy = +1;	break;
 	}
-	MemMap[py][px] = MAN;
+	/*MemMap[py][px] = MAN;*/
 
+	if (MemMap[py + dy][px + dx] != WALL) {
+		if (MemMap[py + dy][px + dx] == WAY) {
+			if (Map[0][py][px] == GOAL) {
+				MemMap[py][px] = GOAL;
+				MemMap[py + dy][px + dx] = MAN;
+			}
+			else {
+				MemMap[py][px] = WAY;
+				MemMap[py + dy][px + dx] = MAN;
+			}
+		}
+		else if(MemMap[py + dy][px + dx] == GOAL) {
+			if (Map[0][py][px] == GOAL) {
+				MemMap[py][px] = GOAL;
+				MemMap[py + dy][px + dx] = MAN;
+			}
+			else {
+				MemMap[py][px] = WAY;
+				MemMap[py + dy][px + dx] = MAN;
+			}
+		}
+	}
+	else {
+		dx = dy = 0;
+	}
+	py += dy;
+	px += dx;
 	InvalidateRect(g_hWnd, NULL, TRUE);
 }
