@@ -75,7 +75,12 @@
       "ProjectGuid": "4f6a4f33-5d9d-42e0-8385-c43abd5b438b",
       "DisplayName": "Client_14_SOLIDExample",
       "ColorIndex": 13
+    },
+    "3f5b22f1-c606-4a44-a04d-2e341ad4807f": {
+      "ProjectGuid": "3f5b22f1-c606-4a44-a04d-2e341ad4807f",
+      "DisplayName": "Client_15_STL",
+      "ColorIndex": 14
     }
   },
-  "NextColorIndex": 14
+  "NextColorIndex": 15
 }

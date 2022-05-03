@@ -31,6 +31,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Client_13_Inheritance", "Cl
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Client_14_SOLIDExample", "Client_14_SOLIDExample\Client_14_SOLIDExample.vcxproj", "{4F6A4F33-5D9D-42E0-8385-C43ABD5B438B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Client_15_STL", "Client_15_STL\Client_15_STL.vcxproj", "{3F5B22F1-C606-4A44-A04D-2E341AD4807F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -151,6 +153,14 @@ Global
 		{4F6A4F33-5D9D-42E0-8385-C43ABD5B438B}.Release|x64.Build.0 = Release|x64
 		{4F6A4F33-5D9D-42E0-8385-C43ABD5B438B}.Release|x86.ActiveCfg = Release|Win32
 		{4F6A4F33-5D9D-42E0-8385-C43ABD5B438B}.Release|x86.Build.0 = Release|Win32
+		{3F5B22F1-C606-4A44-A04D-2E341AD4807F}.Debug|x64.ActiveCfg = Debug|x64
+		{3F5B22F1-C606-4A44-A04D-2E341AD4807F}.Debug|x64.Build.0 = Debug|x64
+		{3F5B22F1-C606-4A44-A04D-2E341AD4807F}.Debug|x86.ActiveCfg = Debug|Win32
+		{3F5B22F1-C606-4A44-A04D-2E341AD4807F}.Debug|x86.Build.0 = Debug|Win32
+		{3F5B22F1-C606-4A44-A04D-2E341AD4807F}.Release|x64.ActiveCfg = Release|x64
+		{3F5B22F1-C606-4A44-A04D-2E341AD4807F}.Release|x64.Build.0 = Release|x64
+		{3F5B22F1-C606-4A44-A04D-2E341AD4807F}.Release|x86.ActiveCfg = Release|Win32
+		{3F5B22F1-C606-4A44-A04D-2E341AD4807F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

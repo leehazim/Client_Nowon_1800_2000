@@ -9,6 +9,17 @@ private:
 	const int DEFAULT_SIZE;
 	
 public:
+
+	class Iterator {
+		T* p_Data;
+		int idx;
+		T& operator*() { return p_Data[idx]; }
+		T& operator=(T* arr) {
+			for (int i = 0; i < Size; i++) {
+				if (&Arr[i] == arr) idx = i;
+			}
+		}
+	};
 	TDArray();
 	TDArray(int);
 	TDArray(const TDArray& Other);
