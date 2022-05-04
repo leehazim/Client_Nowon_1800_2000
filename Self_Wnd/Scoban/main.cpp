@@ -18,8 +18,8 @@ int MemMap[MAX_HEIGHT][MAX_WIDTH];
  tag_tile Map[stage][MAX_HEIGHT][MAX_WIDTH] = {
 	{
 	{WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL},
-	{WALL,WALL,WAY,WAY,GOAL,WAY,WAY,WALL,WALL,WALL},
-	{WALL,WALL,WAY,WAY,BOX,WAY,WAY,WALL,WALL,WALL},
+	{WALL,WALL,WAY,GOAL,GOAL,WAY,WAY,WALL,WALL,WALL},
+	{WALL,WALL,WAY,BOX,BOX,WAY,WAY,WALL,WALL,WALL},
 	{WALL,WALL,WAY,WAY,WAY,WAY,WAY,WALL,WALL,WALL},
 	{WALL,WALL,WAY,WAY,MAN,WAY,WAY,WALL,WALL,WALL},
 	{WALL,WALL,WAY,WAY,WAY,WAY,WAY,WALL,WALL,WALL},
@@ -188,29 +188,29 @@ void Move(int key) {
 	}
 	/*MemMap[py][px] = MAN;*/
 
-	if (MemMap[py + dy][px + dx] != WALL) {
-		if (MemMap[py + dy][px + dx] == WAY) {
-			if (Map[0][py][px] == GOAL) {
+	if (MemMap[py + dy][px + dx] != WALL) { /* 벽이 아닌 경우*/
+		if (MemMap[py + dy][px + dx] == WAY || MemMap[py + dy][px + dx] == GOAL) { /* 이동하려는 경로가 빈공간인 경우*/
+			if (Map[0][py][px] == GOAL) 
 				MemMap[py][px] = GOAL;
-				MemMap[py + dy][px + dx] = MAN;
-			}
-			else {
+			else	
 				MemMap[py][px] = WAY;
-				MemMap[py + dy][px + dx] = MAN;
-			}
+			MemMap[py + dy][px + dx] = MAN;
 		}
-		else if(MemMap[py + dy][px + dx] == GOAL) {
-			if (Map[0][py][px] == GOAL) {
-				MemMap[py][px] = GOAL;
-				MemMap[py + dy][px + dx] = MAN;
+		else { /* 이동하려는 경로에 박스가 있는 경우 */
+			if (MemMap[py + (dy * 2)][px + (dx * 2)] ==  WALL || MemMap[py + (dy * 2)][px + (dx * 2)] == BOX) {
+				dx = dy = 0;
 			}
-			else {
-				MemMap[py][px] = WAY;
+			else if (MemMap[py + (dy * 2)][px + (dx * 2)] == WAY || MemMap[py + (dy * 2)][px + (dx * 2)] == GOAL) {
+				if (Map[0][py][px] == GOAL)
+					MemMap[py][px] = GOAL;
+				else 
+					MemMap[py][px] = WAY;
+				MemMap[py + (dy * 2)][px + (dx * 2)] = BOX;
 				MemMap[py + dy][px + dx] = MAN;
 			}
 		}
 	}
-	else {
+	else { /* 이동하려는 곳이 벽인 경우 이동 불가*/
 		dx = dy = 0;
 	}
 	py += dy;
