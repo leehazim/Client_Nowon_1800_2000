@@ -1,2 +1,3 @@
 ﻿  main.cpp
+C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_SecondProject\Client_15_STL\TDArray.h(37): warning C4172: 지역 변수 또는 임시: tmp의 주소를 반환하고 있습니다.
   Client_15_STL.vcxproj -> C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_SecondProject\Debug\Client_15_STL.exe

@@ -1,4 +1,5 @@
 #pragma once
+#include <cassert>
 template <typename T>
 class TDArray {
 	friend void PrintArray(TDArray& Other);
@@ -10,14 +11,51 @@ private:
 	
 public:
 	class Iterator {
-	public:
+	private:
+		TDArray<T>* p_DA;
 		T* p_Data;
 		int idx;
-		T& operator*() { return p_Data[idx]; }
-		Iterator() {}
-		Iterator(T* data, int index) : p_Data(data), idx(index) {}
+
+	public:
+		T& operator *() { return p_Data[idx]; }
+		Iterator& operator ++() { 
+			/*전위 증감 연산자*/
+			if ((p_DA == nullptr) || (p_DA->Arr != p_Data) || (idx < 0)) {
+				assert(nullptr);
+			}
+
+			if (idx < p_DA->Size - 1) idx++;
+			else idx = -1;
+
+			return *this;
+		}
+		Iterator& operator ++(int) { 
+			/* 후위 증감 연산자*/
+			TDArray<T>::Iterator tmp = *this;
+			++(*this);
+
+			return tmp;
+		}
+		bool operator !=(const TDArray<T>::Iterator& Other) {
+			return Other.idx != idx;
+		}
+		bool operator ==(const TDArray<T>::Iterator& Other) {
+			return !(Other != *this);
+		}
+
+		bool operator <(const TDArray<T>::Iterator& Other) {
+			if (idx < 0) return false;
+			if (Other.idx < 0) return true;
+			if (idx < Other.idx) return true;
+			return false;
+		}
+		Iterator() : p_DA(nullptr), p_Data(nullptr), idx(-1) {}
+		Iterator(TDArray<T>* arr,T* data, int index) : p_DA(arr), p_Data(data), idx(index) {
+			/*if (TDArray<T>::Arr == NULL) idx = -1;*/
+		}
 	};
 	TDArray<T>::Iterator Begin();
+	TDArray<T>::Iterator End();
 
 	TDArray();
 	TDArray(int);
@@ -43,7 +81,12 @@ public:
 
 template<typename T>
 typename TDArray<T>::Iterator TDArray<T>::Begin() {
-	return TDArray<T>::Iterator(Arr, 0);
+	return TDArray<T>::Iterator(this, Arr, 0);
+}
+
+template<typename T>
+typename TDArray<T>::Iterator TDArray<T>::End() {
+	return TDArray<T>::Iterator(this, Arr, -1);
 }
 
 template<typename T>
