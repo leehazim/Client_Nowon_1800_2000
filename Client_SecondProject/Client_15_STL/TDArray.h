@@ -11,13 +11,19 @@ private:
 	
 public:
 	class Iterator {
+		friend class TDArray<T>;
 	private:
 		TDArray<T>* p_DA;
 		T* p_Data;
 		int idx;
 
 	public:
-		T& operator *() { return p_Data[idx]; }
+		TDArray<T>* GetArr() { return p_DA; }
+		int GetIdx() { return idx; }
+		T& operator *() { 
+			if (idx == -1) return p_Data[0];
+			return p_Data[idx];
+		}
 		Iterator& operator ++() { 
 			/*전위 증감 연산자*/
 			if ((p_DA == nullptr) || (p_DA->Arr != p_Data) || (idx < 0)) {
@@ -56,6 +62,7 @@ public:
 	};
 	TDArray<T>::Iterator Begin();
 	TDArray<T>::Iterator End();
+	TDArray<T>::Iterator Erase(const TDArray<T>::Iterator& Where);
 
 	TDArray();
 	TDArray(int);
@@ -87,6 +94,13 @@ typename TDArray<T>::Iterator TDArray<T>::Begin() {
 template<typename T>
 typename TDArray<T>::Iterator TDArray<T>::End() {
 	return TDArray<T>::Iterator(this, Arr, -1);
+}
+
+template<typename T>
+typename TDArray<T>::Iterator TDArray<T>::Erase(const TDArray<T>::Iterator& Where) {
+	if (Where.idx == -1 || Where.idx >= Size) assert(nullptr);
+	if (RemoveIndex(Where.idx) == false) assert(nullptr);
+	return TDArray<T>::Iterator(this, Arr, Where.idx);
 }
 
 template<typename T>
@@ -135,7 +149,10 @@ inline bool TDArray<T>::RemoveBack() {
 
 template<typename T>
 inline bool TDArray<T>::RemoveIndex(int index) {
-	return false;
+	for (int i = index; i < Size - 1; i++) {
+		Arr[i] = Arr[i + 1];
+	}
+	return true;
 }
 
 template<typename T>

@@ -1,3 +1,6 @@
 ﻿  main.cpp
-C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_SecondProject\Client_15_STL\TDArray.h(37): warning C4172: 지역 변수 또는 임시: tmp의 주소를 반환하고 있습니다.
-  Client_15_STL.vcxproj -> C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_SecondProject\Debug\Client_15_STL.exe
+C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_SecondProject\Client_15_STL\main.cpp(63,27): error C2676: 이항 '<': 'std::_List_iterator<std::_List_val<std::_List_simple_types<_Ty>>>'이(가) 이 연산자를 정의하지 않거나 미리 정의된 연산자에 허용되는 형식으로의 변환을 정의하지 않습니다.
+          with
+          [
+              _Ty=int
+          ]

@@ -12,7 +12,9 @@
 #define IDB_MAN                         103
 #define IDB_BITMAP4                     104
 #define IDB_GOAL						104
-#define MESSAGE_START					WM_USER+2							
+#define MESSAGE_START					WM_USER+2	
+#define MESSAGE_RESTART					WM_USER+3
+#define ID_TIMER						1
 
 // Next default values for new objects
 // 

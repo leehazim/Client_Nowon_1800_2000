@@ -9,8 +9,10 @@ HWND g_hWnd;
 /* 게임 로직용 변수들*/
 enum tag_tile{ WALL, BOX, MAN, GOAL, WAY };
 HBITMAP hBitObject[5];
+HBITMAP hBit;
 const int stage = 3;
 int px = -1, py = -1;
+int NowStage = 0;
 
 /* 맵 플레이용 배열*/
 int MemMap[MAX_HEIGHT][MAX_WIDTH];
@@ -46,6 +48,7 @@ void Render(HDC hdc);
 
 void ResetGame();
 void Move(int key);
+bool IsClear();
 
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hRrevInstance, LPSTR lpszCmdParam, int nCmdShow) {
@@ -92,8 +95,22 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		InitWindow();
 		return 0;
 
+	case WM_TIMER:
+		if (IsClear() == true) {
+			KillTimer(hwnd, ID_TIMER);
+			SendMessage(hwnd, MESSAGE_RESTART, 0, 0);
+		}
+		return 0;
+
+	case MESSAGE_RESTART:
+		if (MessageBox(hwnd, TEXT("클리어! 다시시작하겠습니까?"), TEXT("알림"), MB_OKCANCEL) == IDOK)
+			SendMessage(hwnd, MESSAGE_START, 0, 0);
+		return 0;
+
 	case MESSAGE_START:
 		ResetGame();
+		SetTimer(hwnd, ID_TIMER, 10, NULL);
+		InvalidateRect(hwnd, NULL, TRUE);
 		return 0;
 
 	case WM_KEYDOWN:
@@ -146,6 +163,11 @@ void DrawBitmap(HDC hdc, int x, int y, HBITMAP hBit) {
 	DeleteDC(MemDC);
 }
 
+void tmpRender(HDC hdc, HBITMAP hBit) {
+
+
+}
+
 void InitBitmap() {
 	hBitObject[WALL] = LoadBitmap(g_hInst, MAKEINTRESOURCE(IDB_WALL));
 	hBitObject[BOX] = LoadBitmap(g_hInst, MAKEINTRESOURCE(IDB_BOX));
@@ -157,7 +179,9 @@ void InitBitmap() {
 void DestroyBitmap() {
 	for (int i = 0; i < 4; i++)  DeleteObject(hBitObject[i]);
 }
+
 void Render(HDC hdc) {
+
 	for (int i = 0; i < MAX_WIDTH; i++) {
 		for (int j = 0; j < MAX_HEIGHT; j++) {
 			DrawBitmap(hdc, i * 32, j * 32, hBitObject[MemMap[j][i]]);
@@ -168,7 +192,7 @@ void Render(HDC hdc) {
 void ResetGame() {
 	for (int i = 0; i < MAX_WIDTH; i++) {
 		for (int j = 0; j < MAX_HEIGHT; j++) {
-			if (Map[0][j][i] == 2) {
+			if (Map[NowStage][j][i] == MAN) {
 				px = i;
 				py = j;
 			}
@@ -178,7 +202,7 @@ void ResetGame() {
 }
 
 void Move(int key) {
-	if (px == -1 || py == -1)return;
+	if (px == -1 || py == -1) return;
 	int dx = 0, dy = 0;
 	switch (key) {
 	case VK_LEFT: dx = -1;	break;
@@ -190,7 +214,7 @@ void Move(int key) {
 
 	if (MemMap[py + dy][px + dx] != WALL) { /* 벽이 아닌 경우*/
 		if (MemMap[py + dy][px + dx] == WAY || MemMap[py + dy][px + dx] == GOAL) { /* 이동하려는 경로가 빈공간인 경우*/
-			if (Map[0][py][px] == GOAL) 
+			if (Map[NowStage][py][px] == GOAL)
 				MemMap[py][px] = GOAL;
 			else	
 				MemMap[py][px] = WAY;
@@ -201,10 +225,11 @@ void Move(int key) {
 				dx = dy = 0;
 			}
 			else if (MemMap[py + (dy * 2)][px + (dx * 2)] == WAY || MemMap[py + (dy * 2)][px + (dx * 2)] == GOAL) {
-				if (Map[0][py][px] == GOAL)
+				if (Map[NowStage][py][px] == GOAL)
 					MemMap[py][px] = GOAL;
 				else 
 					MemMap[py][px] = WAY;
+
 				MemMap[py + (dy * 2)][px + (dx * 2)] = BOX;
 				MemMap[py + dy][px + dx] = MAN;
 			}
@@ -216,4 +241,15 @@ void Move(int key) {
 	py += dy;
 	px += dx;
 	InvalidateRect(g_hWnd, NULL, TRUE);
+}
+
+bool IsClear() {
+	
+	for (int i = 0; i < MAX_WIDTH; i++) {
+		for (int j = 0; j < MAX_HEIGHT; j++) {
+			if (Map[NowStage][j][i] == GOAL && MemMap[j][i] != BOX)
+				return false;
+		}
+	}
+	return true;
 }

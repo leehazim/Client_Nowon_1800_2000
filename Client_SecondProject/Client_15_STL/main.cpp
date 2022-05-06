@@ -7,22 +7,20 @@ using namespace std;
 
 int main(void) {
 
-	vector<int> tmpVec;
+	/*vector<int> tmpVec;
 	vector<int>::iterator it;
 	for (int i = 1; i <= 10; i++)
 		tmpVec.push_back(i);
 	for (it = tmpVec.begin(); it != tmpVec.end(); it++) {
 		
-	}
+	}*/
 	/*int a = *tmpVec.begin();
 	cout << a << endl;*/
 
-	it = tmpVec.end();
-
+	/*it = tmpVec.end();
 	tmpVec.push_back(20);
-
 	tmpVec.push_back(21);
-	cout << *it << endl;
+	cout << *it << endl;*/
 	
 	/*cout << *tmpVec.end() << endl; 마지막 요소가 출력될거 같지만 STL에서 end로 가져오는 반복자는 끝다음점이다. 
 	프로그램에서 모든 마지막 인덱스와 크기인 숫자는 같지가 않은 [a,b)방식의 포함관계임을 잊지말자*/
@@ -43,15 +41,29 @@ int main(void) {
 	for (int i = 1; i <= 10; i++) 
 		arr.PushBack(i);
 	iter = arr.Begin();
+	iter++;
 	/*cout << *iter << endl;*/
-	iter2 = iter++;
-
-	cout << *iter2++ << endl;
+	arr.Erase(iter);
 	cout << *iter << endl;
 	for (iter = arr.Begin(); iter < arr.End(); iter++) {
 		cout << *iter << " ";
- 	}
+	}
 	cout << endl;
-	
+
+	list<int> li;
+	list<int>::iterator it;
+
+	li.push_back(10);
+	li.push_back(20);
+	li.push_back(30);
+	li.push_back(40);
+	li.push_front(60);
+	li.insert(++li.begin(), 50);
+
+	for (it = li.begin(); it != li.end(); it++) {
+		cout << *it<< " ";
+	}
+	cout << endl;
+
 	return 0;
 }
