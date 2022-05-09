@@ -47,7 +47,7 @@ void Render(HDC hdc);
 
 
 void ResetGame();
-void Move(int key);
+void Move(HDC hdc,int key);
 bool IsClear();
 
 
@@ -96,6 +96,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		return 0;
 
 	case WM_TIMER:
+		hdc = GetDC(hwnd);
+		
+		ReleaseDC(hwnd, hdc);
 		if (IsClear() == true) {
 			KillTimer(hwnd, ID_TIMER);
 			SendMessage(hwnd, MESSAGE_RESTART, 0, 0);
@@ -114,15 +117,18 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		return 0;
 
 	case WM_KEYDOWN:
+		hdc = GetDC(hwnd);
 		switch (wParam) {
 		case 'S': SendMessage(hwnd, MESSAGE_START, 0, 0); break;		  
 		}
-		Move(wParam);
+		Move(hdc, wParam);
+		ReleaseDC(hwnd, hdc);
 		return 0;
 
 	case WM_PAINT:
 		hdc = BeginPaint(hwnd, &ps);
 		Render(hdc);
+		/*if(hBit) DrawBitmap(hdc, 0, 0, hBit);*/
 		EndPaint(hwnd, &ps);
 		return 0;
 
@@ -144,30 +150,6 @@ void InitWindow() {
 	SetWindowPos(g_hWnd, NULL, 0, 0, x * MAX_WIDTH * 2, (y + 3) * MAX_HEIGHT, SWP_NOMOVE);
 }
 
-void DrawBitmap(HDC hdc, int x, int y, HBITMAP hBit) {
-	HDC MemDC;
-	HBITMAP OldBitmap;
-	BITMAP bit;
-	int bx, by;
-	
-	if (hBit == NULL) return;
-
-	MemDC = CreateCompatibleDC(hdc);
-	OldBitmap = (HBITMAP)SelectObject(MemDC, hBit);
-	GetObject(hBit, sizeof(BITMAP), &bit);
-	bx = bit.bmWidth;
-	by = bit.bmHeight;
-	BitBlt(hdc, x, y, bx, by, MemDC, 0, 0, SRCCOPY);
-	
-	SelectObject(MemDC, OldBitmap);
-	DeleteDC(MemDC);
-}
-
-void tmpRender(HDC hdc, HBITMAP hBit) {
-
-
-}
-
 void InitBitmap() {
 	hBitObject[WALL] = LoadBitmap(g_hInst, MAKEINTRESOURCE(IDB_WALL));
 	hBitObject[BOX] = LoadBitmap(g_hInst, MAKEINTRESOURCE(IDB_BOX));
@@ -180,13 +162,44 @@ void DestroyBitmap() {
 	for (int i = 0; i < 4; i++)  DeleteObject(hBitObject[i]);
 }
 
-void Render(HDC hdc) {
+void DrawBitmap(HDC hdc, int x, int y, HBITMAP hBit) {
+	HDC MemDC;
+	HBITMAP OldBitmap;
+	BITMAP bit;
+	int bx, by;
+	
+	if (hBit == NULL) return;
 
-	for (int i = 0; i < MAX_WIDTH; i++) {
-		for (int j = 0; j < MAX_HEIGHT; j++) {
-			DrawBitmap(hdc, i * 32, j * 32, hBitObject[MemMap[j][i]]);
-		}
-	}
+	MemDC = CreateCompatibleDC(hdc);
+	OldBitmap = (HBITMAP)SelectObject(MemDC, hBit);
+	
+	GetObject(hBit, sizeof(BITMAP), &bit);
+	bx = bit.bmWidth;
+	by = bit.bmHeight;
+	BitBlt(hdc, x, y, bx, by, MemDC, 0, 0, SRCCOPY);
+	
+	SelectObject(MemDC, OldBitmap);
+	DeleteDC(MemDC);
+}
+
+void Render(HDC hdc) {
+	HDC MemDC;
+	HBITMAP OldBitmap;
+	RECT rt;
+
+	/* 더블버퍼링을 위해서 메모리DC에 먼저그린다음에 빠른 복사를 위한 코딩 구조*/
+	MemDC = CreateCompatibleDC(hdc);
+	GetClientRect(g_hWnd, &rt);
+	if (hBit == NULL) hBit = CreateCompatibleBitmap(hdc, rt.right, rt.bottom);
+	OldBitmap = (HBITMAP)SelectObject(MemDC, hBit);
+	FillRect(MemDC, &rt, (HBRUSH)(COLOR_WINDOW + 1));
+	for (int i = 0; i < MAX_HEIGHT; i++)
+		for (int j = 0; j < MAX_WIDTH; j++)
+			DrawBitmap(MemDC, j * 32, i * 32, hBitObject[MemMap[i][j]]);
+	
+	BitBlt(hdc, 0, 0, rt.right - rt.left, rt.bottom - rt.top, MemDC, 0, 0, SRCCOPY);
+	SelectObject(MemDC, OldBitmap);
+	DeleteDC(MemDC);
 }
 
 void ResetGame() {
@@ -201,7 +214,11 @@ void ResetGame() {
 	}
 }
 
-void Move(int key) {
+void Move(HDC hdc, int key) {
+	HDC MemDC;
+	HBITMAP OldBitmap;
+	RECT rt;
+
 	if (px == -1 || py == -1) return;
 	int dx = 0, dy = 0;
 	switch (key) {
@@ -210,7 +227,6 @@ void Move(int key) {
 	case VK_UP:	dy = -1;	break;
 	case VK_DOWN: dy = +1;	break;
 	}
-	/*MemMap[py][px] = MAN;*/
 
 	if (MemMap[py + dy][px + dx] != WALL) { /* 벽이 아닌 경우*/
 		if (MemMap[py + dy][px + dx] == WAY || MemMap[py + dy][px + dx] == GOAL) { /* 이동하려는 경로가 빈공간인 경우*/
@@ -240,7 +256,20 @@ void Move(int key) {
 	}
 	py += dy;
 	px += dx;
-	InvalidateRect(g_hWnd, NULL, TRUE);
+
+	/*MemDC = CreateCompatibleDC(hdc);
+	GetClientRect(g_hWnd, &rt);
+	if (hBit == NULL) hBit = CreateCompatibleBitmap(MemDC, rt.right, rt.bottom);
+	OldBitmap = (HBITMAP)SelectObject(MemDC, hBit);
+	for (int i = 0; i < MAX_HEIGHT; i++) {
+		for (int j = 0; j < MAX_WIDTH; j++) {
+			DrawBitmap(MemDC, j * 32, i * 32, hBitObject[MemMap[i][j]]);
+		}
+	}
+	SelectObject(MemDC, OldBitmap);
+	DeleteDC(MemDC);*/
+
+	InvalidateRect(g_hWnd, NULL, FALSE);
 }
 
 bool IsClear() {
