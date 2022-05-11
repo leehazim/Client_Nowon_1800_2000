@@ -15,7 +15,12 @@
       "ProjectGuid": "26dac2df-1c21-4137-a759-7dcf0f15092b",
       "DisplayName": "Scoban",
       "ColorIndex": 1
+    },
+    "bd7c7137-cc60-4ec0-b607-a90d219e183c": {
+      "ProjectGuid": "bd7c7137-cc60-4ec0-b607-a90d219e183c",
+      "DisplayName": "MapMaker",
+      "ColorIndex": 2
     }
   },
-  "NextColorIndex": 2
+  "NextColorIndex": 3
 }
