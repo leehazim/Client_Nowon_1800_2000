@@ -1,10 +1,13 @@
 #include <Windows.h>
 #pragma comment(lib, "Msimg32")
 
+
 #define BLOCK_WIDTH 32
 #define BLOCK_HEIGHT 32
 HBITMAP Tiles[5];
+HWND TileWnd[150];
 enum tag_Tile { WALL, BOX, MAN, GOAL, WAY };
+int countBox = 0, countGoal = 0;
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK TileProc(HWND hwnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
@@ -12,6 +15,8 @@ LPCTSTR lpszClass = TEXT("MapMaker");
 LPCTSTR lpszTile = TEXT("Tile");
 HINSTANCE g_hInst;
 HWND g_hMainWnd;
+HWND hStatic;
+
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdParam, int nCmdShow) {
 	HWND hWnd;
@@ -31,7 +36,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmd
 	RegisterClass(&ws);
 
 	ws.lpfnWndProc = TileProc;
-	ws.cbWndExtra = 8;
+	ws.cbWndExtra = sizeof(int);
 	ws.lpszClassName = lpszTile;
 	RegisterClass(&ws);
 
@@ -93,9 +98,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 	TCHAR lpszStr[MAX_PATH] = TEXT("");
 	DWORD dwRead;
 	HDC hdc; PAINTSTRUCT ps;
+	TCHAR str[128];
 
 	switch (iMessage) {
 	case WM_CREATE:
+		g_hMainWnd = hwnd;
 		memset(&OFN, 0, sizeof(OPENFILENAME));
 		OFN.lStructSize = sizeof(OPENFILENAME);
 		OFN.hwndOwner = hwnd;
@@ -109,12 +116,17 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 				ReleaseDC(hwnd, hdc);
 			}
 		}
-		
-		
+		for (int i = 0; i < 15; i++) {
+			for(int j = 0, count = 0; j < 10; j++, count++)
+				TileWnd[count] = CreateWindow(lpszTile, NULL, WS_CHILD | WS_VISIBLE | WS_BORDER,
+										  j*32, i*32, 32, 32, hwnd, (HMENU)NULL, g_hInst, NULL);
+		}
 		return 0;
 
 	case WM_PAINT:
 		hdc = BeginPaint(hwnd, &ps);
+		wsprintf(str, TEXT("박스 개수 = %d, 골개수 = %d"), countBox, countGoal);
+		TextOut(hdc, 400, 10, str, lstrlen(str));
 		EndPaint(hwnd, &ps);
 		return 0;
 
@@ -127,7 +139,32 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 
 LRESULT CALLBACK TileProc(HWND hwnd, UINT iMessage, WPARAM wParam, LPARAM lParam) {
 
+	HDC hdc; PAINTSTRUCT ps;
+	int tmp;
 	switch (iMessage) {
+	case WM_CREATE:
+		SetWindowLongPtr(hwnd, 0, WALL);
+		return 0;
+
+	case WM_LBUTTONDOWN:
+		tmp = GetWindowLongPtr(hwnd, 0);
+		if (tmp == BOX) countBox--;
+		else if (tmp == GOAL) countGoal--;
+		tmp++;
+		if (tmp == BOX) countBox++;
+		else if (tmp == GOAL) countGoal++;
+		else if (tmp >= WAY) tmp = WALL;
+		SetWindowLongPtr(hwnd, 0, tmp);
+		InvalidateRect(hwnd, NULL, TRUE);
+		InvalidateRect(g_hMainWnd, NULL, TRUE);
+		return 0;
+
+	case WM_PAINT:
+		hdc = BeginPaint(hwnd, &ps);
+		DrawBitmap(hdc, 0, 0, Tiles[GetWindowLongPtr(hwnd, 0)]);
+		EndPaint(hwnd, &ps);
+		return 0;
+
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		return 0;
