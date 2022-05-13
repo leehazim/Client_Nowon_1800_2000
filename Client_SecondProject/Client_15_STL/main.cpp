@@ -38,8 +38,9 @@ int main(void) {
 
 	TDArray<int> arr;
 	TDArray<int>::Iterator iter, iter2;
-	for (int i = 1; i <= 10; i++) 
+	for (int i = 1; i <= 10; i++) {
 		arr.PushBack(i);
+	}
 	iter = arr.Begin();
 	iter++;
 	/*cout << *iter << endl;*/

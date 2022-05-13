@@ -25,8 +25,18 @@ int main(void) {
 
 /* 다형성 같은 기반클래스에서 파생되어 나온 클래스들이 호출되었을때 자기자신이 호출되는 것*/
 /* 함수 오버로딩 같은이름의 함수들을 매개변수를 다르게 주어서 여러개 선언할 수 있는것 */
-int add(int a, int b, int c) { return a + b + c; }
-int add(int a, int b) { return a + b; }
-double add(double a, double b) { return a + b; }
-string add(string a, string b) { return a.append(b); }
-inline int Sub(int a, int b) { return a - b; }
+int add(int a, int b, int c) {
+	return a + b + c;
+}
+int add(int a, int b) {
+	return a + b;
+}
+double add(double a, double b) {
+	return a + b;
+}
+string add(string a, string b) { 
+	return a.append(b);
+}
+inline int Sub(int a, int b) { 
+	return a - b;
+}

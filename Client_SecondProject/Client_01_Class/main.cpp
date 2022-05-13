@@ -57,7 +57,9 @@ namespace를 해당 소스파일에서 전역으로 쓰고 싶을때 사용한다.
 using namespace std;
 
 void Swap(int& a, int& b) {
-	int t = a; a = b; b = t;
+	int t = a;
+	a = b; 
+	b = t;
 }
 
 int main(void) {
@@ -68,13 +70,18 @@ int main(void) {
 
 	cout << i;
 	cout.width(12);	cout << right << "Hello C++!" << endl;
-	int age = 2; cout << "안녕! 몇살이니? : ";
-	cin >> age; cout << "안녕! 나는 " << age << "살이야!" << endl;
 
-	char name[20]; cout << "이름이 뭐니? : "; cin >> name;
+	int age = 2; 
+	cout << "안녕! 몇살이니? : ";
+	cin >> age;
+	cout << "안녕! 나는 " << age << "살이야!" << endl;
+
+	char name[20];
+	cout << "이름이 뭐니? : "; cin >> name;
 	cout << "내 이름은 " << name << "이야" << endl;
 	
 	int a = 3, b = 4; Swap(a, b); 
 	cout << a << " " << b << endl;
+
 	return 0;
 }

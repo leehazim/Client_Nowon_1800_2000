@@ -15,6 +15,7 @@ int main(void) {
 }
 
 void PrintArray(TDArray<int>& Other) {
-	for (int i = 0; i < Other.Size; i++) std::cout << Other.Arr[i] << " ";
+	for (int i = 0; i < Other.Size; i++)
+		std::cout << Other.Arr[i] << " ";
 	std::cout << std::endl;
 }
