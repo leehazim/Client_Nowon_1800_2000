@@ -9,9 +9,14 @@ int main(void) {
 	int arr[3]; /* 배열이름만을 사용하면 배열의 주소를 가르키는 포인터*/
 
 	int (*p)(int, int);
-	p = Sum; printf("%d\n",p(1, 2));
-	p = GetFactorial; printf("%d\n", p(5, 0));
-	p = Factorial; printf("%d\n", p(5, 0));
+	p = Sum; 
+	printf("%d\n",p(1, 2));
+
+	p = GetFactorial;
+	printf("%d\n", p(5, 0));
+
+	p = Factorial;
+	printf("%d\n", p(5, 0));
 
 	/* void형 포인터*/
 	void* vp;

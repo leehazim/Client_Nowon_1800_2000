@@ -8,13 +8,16 @@
 void func(void* Data1, void* Data2, const char* DataType) {
 	
 	if (!strcmp(DataType, "int")) {
-		Swap(int, *(int*)Data1, *(int*)Data2); return;
+		Swap(int, *(int*)Data1, *(int*)Data2);
+		return;
 	}
 	if (!strcmp(DataType, "char")) {
-		Swap(char, *(char*)Data1, *(char*)Data2); return;
+		Swap(char, *(char*)Data1, *(char*)Data2); 
+		return;
 	}
 	if (!strcmp(DataType, "double")) {
-		Swap(double, *(double*)Data1, *(double*)Data2); return;
+		Swap(double, *(double*)Data1, *(double*)Data2); 
+		return;
 	}
 }
 

@@ -110,7 +110,12 @@
       "ProjectGuid": "043ef94a-d461-465c-9d0c-befb090c887d",
       "DisplayName": "Client_DataStructure_LinkedList",
       "ColorIndex": 4
+    },
+    "c70a9a85-4434-434d-a0c9-19f58fd8266d": {
+      "ProjectGuid": "c70a9a85-4434-434d-a0c9-19f58fd8266d",
+      "DisplayName": "Client_Array",
+      "ColorIndex": 5
     }
   },
-  "NextColorIndex": 5
+  "NextColorIndex": 6
 }

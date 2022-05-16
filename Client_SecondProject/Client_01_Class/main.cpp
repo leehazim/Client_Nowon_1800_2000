@@ -75,7 +75,7 @@ int main(void) {
 	cout << "안녕! 몇살이니? : ";
 	cin >> age;
 	cout << "안녕! 나는 " << age << "살이야!" << endl;
-
+	
 	char name[20];
 	cout << "이름이 뭐니? : "; cin >> name;
 	cout << "내 이름은 " << name << "이야" << endl;

@@ -4,8 +4,8 @@
 
 void OutArr(int ar[], int len) {
 	//int len = sizeof(ar); /* 매개변수는 결국 포인터이다.  그래서 sizeof 연산자를 사용해도 포인터의 크기가 나올뿐이다.*/
-	int i;
-	for (i = 0; i < len; i++) printf("%d ", ar[i]);
+	for (int i = 0; i < len; i++) 
+		printf("%d ", ar[i]);
 }
 
 int main(void) {
@@ -29,7 +29,7 @@ int main(void) {
 	printf("%d\n", p1 < p2); /* 메모리상에서의 상대적인 주소를 알 수 있다.*/
 
 	int a = 1, b = 2;
-	int* q1 = &a, q2 = &b;
+	int* q1 = &a, *q2 = &b;
 	printf("%d\n", q1 - q2);
 
 	// 포인터의 덧셈연산 (상수나 증감)

@@ -16,21 +16,42 @@ int main(void) {
 		printf("연산자를 입력해주세요 : ");   
 		scanf("%s", op);
 	
-		if (!strcmp(op, "sum")) pF = sum;
-		else if (!strcmp(op, "sub")) pF = sub;
-		else if (!strcmp(op, "mul")) pF = mul;
-		else if (!strcmp(op, "div")) pF = div;
-		else if (!strcmp(op, "mod")) pF = mod;
-		else { puts("잘못된 연산자를 입력하셨습니다."); pF = NULL; }
+		if (!strcmp(op, "sum")) {
+			pF = sum;
+		}
+		else if (!strcmp(op, "sub")) {
+			pF = sub;
+		}
+		else if (!strcmp(op, "mul")) {
+			pF = mul;
+		}
+		else if (!strcmp(op, "div")) {
+			pF = div;
+		}
+		else if (!strcmp(op, "mod")) {
+			pF = mod;
+		}
+		else {
+			puts("잘못된 연산자를 입력하셨습니다."); 
+			pF = NULL; 
+		}
 	} while (pF == NULL);
 	printf("연산 결과 = %.2lf\n", pF(num1, num2));
 	
 	return 0;
 }
 
-double sum(double a, double b){return a + b;}
-double sub(double a, double b){return a - b;}
-double mul(double a, double b){return a * b;}
+double sum(double a, double b){
+	return a + b;
+}
+
+double sub(double a, double b){
+	return a - b;
+}
+
+double mul(double a, double b){
+	return a * b;
+}
 
 double div(double a, double b) {
 	if (b == 0.0) return 0.0;
