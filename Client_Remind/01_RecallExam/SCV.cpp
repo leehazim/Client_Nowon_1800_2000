@@ -1,16 +1,18 @@
 #include "SCV.h"
 #include <iostream>
 #include <chrono>
+#include "CommandCenter.h"
 
 SCV::SCV() : m_state(STATE::IDLE), m_timeMark(0.0) {
-	RegisterCallback(SayImReady);
-	cb(this->id);
+	CommandCenter* commandCenter = CommandCenter::GetInstance();
+	id = commandCenter->GetUnitSpawnCount();
+	commandCenter->Register(*this);
 }
 
 void SCV::DoMine() {
+	cb(id);
 	m_state = STATE::START_MINING;
 }
-
 
 void SCV::UpdateState() {
 	switch (m_state)
@@ -21,18 +23,19 @@ void SCV::UpdateState() {
 
 	case SCV::START_MINING:
 		m_timeMark = clock();
-		m_state = STATE::ON_MINING;
+		NextState();
 		break;
 
 	case SCV::ON_MINING:
 		// 채굴이 끝났는지 검사
-		if ((clock() - m_timeMark) > SCV_MININGTIME) {
+		if ((clock() - m_timeMark) > SCV_MINING_TIME) {
 			NextState();
 		}
 		break;
 
 	case SCV::FINISH_MINING:
-		DoMine();
+		CommandCenter::GetInstance()->IncreaseMinerals(SCV_MINING_AMOUNT);
+		m_state = STATE::IDLE;
 		break;
 
 	default:
@@ -46,8 +49,4 @@ void SCV::NextState() {
 
 void SCV::RegisterCallback(REGISTER_CALLBACK callback) {
 	cb = callback;
-}
-
-void SCV::SayImReady(int id) {
-	std::cout <<  "SCV" << id<<  "준비완료!" << std::endl;
 }

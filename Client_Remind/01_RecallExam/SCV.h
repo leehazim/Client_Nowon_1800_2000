@@ -1,8 +1,11 @@
 #pragma once
 #define SCV_COST 50
-#define SCV_MININGTIME 2.0
+#define SCV_SPAWN_TIME 4000
+#define SCV_MINING_TIME 2000
+#define SCV_MINING_AMOUNT 8
 
 typedef void(*REGISTER_CALLBACK)(int);
+
 /// <summary>
 /// 작성자 : 이승현
 /// 
@@ -29,5 +32,4 @@ public:
 	void UpdateState();
 	void NextState();
 	void RegisterCallback(REGISTER_CALLBACK callback);
-	static void SayImReady(int id);
 };
