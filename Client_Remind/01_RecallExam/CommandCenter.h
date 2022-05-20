@@ -32,4 +32,3 @@ public:
 	void IncreaseMinerals(int amount);
 	int GetUnitSpawnCount();
 };
-

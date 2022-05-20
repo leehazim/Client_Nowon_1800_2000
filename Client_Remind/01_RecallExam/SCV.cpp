@@ -43,6 +43,22 @@ void SCV::UpdateState() {
 	}
 }
 
+// enum은 결국 32비트 정수값이라서 지정할 수 있는 상태의 크기는 33이다.
+// 0000 ~ 1000000000
+enum LayerMask {
+	GHOST = 0 << 0,
+	PLAYER = 1 << 0,
+	WALL = 1 << 1,
+	GROUND = 1 << 2,
+};
+// 그에 대한 해결책으로 C++에서 제공하는 enum class도 있다.
+// 그러나 파일로 출력하고 입력하는 과정에서 상당히 복잡하기 때문에 
+// 추천할 만한 방식은 아니다.
+enum class LAYER_MASK_64 : unsigned __int64 {
+	IDLE = 0x0000000000000000000LL,
+	PLAYER = 1 << 0,
+};
+
 void SCV::NextState() {
 	m_state = (STATE)(m_state + 1);
 }
