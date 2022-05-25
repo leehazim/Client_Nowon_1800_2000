@@ -80,7 +80,12 @@
       "ProjectGuid": "3f5b22f1-c606-4a44-a04d-2e341ad4807f",
       "DisplayName": "Client_15_STL",
       "ColorIndex": 14
+    },
+    "f49010c4-3bfd-44a4-9799-7abd44708118": {
+      "ProjectGuid": "f49010c4-3bfd-44a4-9799-7abd44708118",
+      "DisplayName": "Client_16_Sort",
+      "ColorIndex": 15
     }
   },
-  "NextColorIndex": 15
+  "NextColorIndex": 0
 }
