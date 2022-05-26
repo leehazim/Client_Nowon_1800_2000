@@ -25,6 +25,10 @@
 // 자기 위치를 찾아서 삽입하기 때문에 삽입정렬
 // 배열의 정렬을 유지하면서 전체 정렬을 진행(정렬 안정성을 이야기하는 것)
 // 
+
+//	4. Mergy Sort 
+//  피벗을 기준으로 배열을 분해해서 정렬하는 방법
+//
 int main(void) {
 	
 	int arr[10];
@@ -42,6 +46,10 @@ int main(void) {
 		arr[i] = rand() % 1000;
 	SortExamples::InsertionSort(arr, sizeof(arr) / sizeof(arr[0]));
 	for (int i = 0; i < 10; i++) std::cout << arr[i] << " ";
-	
+	for (int i = 0; i < 10; i++)
+		arr[i] = i + 1;
+	SortExamples::MergySort(arr, 0, 9);
+	for (int i = 0; i < 10; i++)
+		std::cout << arr[i] << std::endl;
 	return 0;
 }

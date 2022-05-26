@@ -67,3 +67,35 @@ void SortExamples::InsertionSort(int* arr, int length) {
 		std::cout << std::endl;
 	}
 }
+
+void SortExamples::MergySort(int* arr, int start, int end) {
+	if (start >= end) return;
+	int mid = start + end / 2;
+	MergySort(arr, start, mid);
+	MergySort(arr, mid + 1, end);
+	Mergy(arr, start, end, mid);
+}
+
+void SortExamples::Mergy(int* arr, int start, int end, int mid) {
+	int* tmp = new int[end + 1];
+	for (int i = start; i <= end; i++) {
+		tmp[i] = arr[i];
+	}
+	int part1 = start;
+	int part2 = mid + 1;
+	int index = start;
+
+	while (part1 <= mid &&
+		   part2 <= end) {
+		if (tmp[part1] <= tmp[part2]) {
+			arr[index++] = tmp[part1++];
+		}
+		else {
+			arr[index++] = tmp[part2++];
+		}
+	}
+	for (int i = 0; i < mid - part1; i++) {
+		arr[index + i] = tmp[part1 + i];
+	}
+	delete tmp;
+}
