@@ -6,8 +6,10 @@ public:
 	static void SelectionSort(int* arr, int length);
 	static void InsertionSort(int* arr, int length);
 	static void MergySort(int* arr, int start, int end); // MergeSort ÀÇ ºÐÇÒ
-	
+	static void QuickSort(int* arr, int start, int end);
+
 private:
 	static void Mergy(int* arr, int start, int end, int mid);
+	static void Swap(int& a, int& b);
 };
 

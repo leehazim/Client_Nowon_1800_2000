@@ -69,11 +69,29 @@ void SortExamples::InsertionSort(int* arr, int length) {
 }
 
 void SortExamples::MergySort(int* arr, int start, int end) {
+	if (start < end)
+	{
+		int mid = (start + end) / 2;
+
+		MergySort(arr, start, mid);
+		MergySort(arr, mid + 1, end);
+		Mergy(arr, start, end, mid);
+	}
+}
+
+void SortExamples::QuickSort(int* arr, int start, int end) {
+	int pivot = (start + end) / 2;
+	int left = start;
+	int right = end - 1;
+	
 	if (start >= end) return;
-	int mid = start + end / 2;
-	MergySort(arr, start, mid);
-	MergySort(arr, mid + 1, end);
-	Mergy(arr, start, end, mid);
+	while (left < pivot &&
+		   right > pivot) {
+		while (arr[pivot] < arr[left]) left++;
+		while (arr[pivot] > arr[right])right--;
+		Swap(arr[left], arr[right]); 
+	}
+	
 }
 
 void SortExamples::Mergy(int* arr, int start, int end, int mid) {
@@ -94,8 +112,20 @@ void SortExamples::Mergy(int* arr, int start, int end, int mid) {
 			arr[index++] = tmp[part2++];
 		}
 	}
-	for (int i = 0; i < mid - part1; i++) {
+
+	for (int i = 0; i <= mid - part1; i++) {
 		arr[index + i] = tmp[part1 + i];
 	}
+
+	for (int i = 0; i < end; i++) {
+		std::cout << arr[i] << " ";
+	}
+	std::cout << std::endl;
 	delete tmp;
+}
+
+void SortExamples::Swap(int& a, int& b) {
+	int tmp = a;
+	a = b;
+	b = tmp;
 }

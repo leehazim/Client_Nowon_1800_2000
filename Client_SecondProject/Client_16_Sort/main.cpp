@@ -26,8 +26,14 @@
 // 배열의 정렬을 유지하면서 전체 정렬을 진행(정렬 안정성을 이야기하는 것)
 // 
 
-//	4. Mergy Sort 
-//  피벗을 기준으로 배열을 분해해서 정렬하는 방법
+// 4. Mergy Sort 
+// 피벗을 기준으로 배열을 분해해서 정렬하는 방법
+// O(N log N)
+
+// 5. Quick Sort
+// pivot을 기준으로 pivot보다 크면 오른쪽, 작으면 왼쪽같은 방식으로 보낸후 
+// 머지와 마찬가지로 분할
+// 그리고 분할을 한뒤 다시 pivot을 기준으로 좌우 정렬
 //
 int main(void) {
 	
@@ -46,10 +52,24 @@ int main(void) {
 		arr[i] = rand() % 1000;
 	SortExamples::InsertionSort(arr, sizeof(arr) / sizeof(arr[0]));
 	for (int i = 0; i < 10; i++) std::cout << arr[i] << " ";
+	std::cout << std::endl;
+
+	int const mergeSortArrayCount = 10;
+	int arr2[mergeSortArrayCount];
+	for (int i = 0; i < mergeSortArrayCount; i++) {
+		arr2[i] = rand() % 40;
+	}
+	SortExamples::MergySort(arr2, 0, mergeSortArrayCount-1);
+
+	for (int i = 0; i < mergeSortArrayCount; i++)
+		std::cout << arr2[i] << " ";
+	std::cout << std::endl;
+
 	for (int i = 0; i < 10; i++)
-		arr[i] = i + 1;
-	SortExamples::MergySort(arr, 0, 9);
+		arr[i] = rand() % 1000;
+	SortExamples::QuickSort(arr, 0, 10);
 	for (int i = 0; i < 10; i++)
-		std::cout << arr[i] << std::endl;
+		std::cout << arr[i] << " ";
+	std::cout << std::endl;
 	return 0;
 }
