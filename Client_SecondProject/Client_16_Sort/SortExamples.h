@@ -10,6 +10,7 @@ public:
 
 private:
 	static void Mergy(int* arr, int start, int end, int mid);
+	static int Partition(int* arr, int start, int end);
 	static void Swap(int& a, int& b);
 };
 

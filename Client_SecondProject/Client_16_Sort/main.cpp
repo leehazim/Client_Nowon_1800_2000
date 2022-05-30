@@ -65,11 +65,15 @@ int main(void) {
 		std::cout << arr2[i] << " ";
 	std::cout << std::endl;
 
-	for (int i = 0; i < 10; i++)
+	std::cout << "Äü ======" << std::endl;
+
+	for (int i = 0; i < 10; i++) 
 		arr[i] = rand() % 1000;
-	SortExamples::QuickSort(arr, 0, 10);
+	SortExamples::QuickSort(arr, 0, 9);
+
 	for (int i = 0; i < 10; i++)
 		std::cout << arr[i] << " ";
 	std::cout << std::endl;
+	
 	return 0;
 }

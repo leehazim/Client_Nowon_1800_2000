@@ -80,18 +80,10 @@ void SortExamples::MergySort(int* arr, int start, int end) {
 }
 
 void SortExamples::QuickSort(int* arr, int start, int end) {
-	int pivot = (start + end) / 2;
-	int left = start;
-	int right = end - 1;
-	
 	if (start >= end) return;
-	while (left < pivot &&
-		   right > pivot) {
-		while (arr[pivot] < arr[left]) left++;
-		while (arr[pivot] > arr[right])right--;
-		Swap(arr[left], arr[right]); 
-	}
-	
+	int pivot = Partition(arr, start, end);
+	QuickSort(arr, start, pivot);
+	QuickSort(arr, pivot + 1, end);	
 }
 
 void SortExamples::Mergy(int* arr, int start, int end, int mid) {
@@ -122,6 +114,20 @@ void SortExamples::Mergy(int* arr, int start, int end, int mid) {
 	}
 	std::cout << std::endl;
 	delete tmp;
+}
+
+int SortExamples::Partition(int* arr, int start, int end) {
+	int pivot = arr[(start + end) / 2];
+	
+	while (true) { 
+		while (arr[start] < pivot) start++;
+		while (arr[end] > pivot) end--;
+
+		Swap(arr[start], arr[end]);
+		if (start == end) 
+			return end;
+	}
+	return 0;
 }
 
 void SortExamples::Swap(int& a, int& b) {
