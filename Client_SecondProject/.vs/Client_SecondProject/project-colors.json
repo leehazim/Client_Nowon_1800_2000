@@ -90,7 +90,12 @@
       "ProjectGuid": "bf7d5e65-2617-4ffb-95e4-d1893de1eefb",
       "DisplayName": "Client_17_STLAlgorithm",
       "ColorIndex": 0
+    },
+    "4fc45286-d63d-4981-b964-df9d528e5205": {
+      "ProjectGuid": "4fc45286-d63d-4981-b964-df9d528e5205",
+      "DisplayName": "Clietn_18_PriorityQueue",
+      "ColorIndex": 1
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 2
 }
