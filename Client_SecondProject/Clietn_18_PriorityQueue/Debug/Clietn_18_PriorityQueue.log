@@ -1,0 +1,3 @@
+﻿  main.cpp
+C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_SecondProject\Clietn_18_PriorityQueue\PriorityQueue.h(110): warning C4172: 지역 변수 또는 임시: top의 주소를 반환하고 있습니다.
+  Clietn_18_PriorityQueue.vcxproj -> C:\Users\User\Documents\GitHub\Client_Nowon_1800_2000\Client_SecondProject\Debug\Clietn_18_PriorityQueue.exe

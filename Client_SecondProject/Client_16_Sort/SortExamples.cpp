@@ -86,6 +86,12 @@ void SortExamples::QuickSort(int* arr, int start, int end) {
 	QuickSort(arr, pivot + 1, end);	
 }
 
+void SortExamples::HeapSort(int* arr, int length) {
+	// Heapify 
+
+	// 
+}
+
 void SortExamples::Mergy(int* arr, int start, int end, int mid) {
 	int* tmp = new int[end + 1];
 	for (int i = start; i <= end; i++) {
@@ -134,4 +140,22 @@ void SortExamples::Swap(int& a, int& b) {
 	int tmp = a;
 	a = b;
 	b = tmp;
+}
+
+void SortExamples::Heapify_TopDown(int* arr, int length) {
+	//Top-Down 방식으로 변경
+	int current = 1;
+	while (current < length) {
+		while (true) {
+			int parent = current / 2;
+			if (arr[parent] < arr[current]) {
+				int tmp = arr[parent];
+				arr[parent] = arr[current];
+				arr[current] = tmp;
+
+				parent = current;
+			}
+			current++;
+		}
+	}
 }
