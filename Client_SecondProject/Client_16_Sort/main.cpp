@@ -73,7 +73,21 @@ int main(void) {
 
 	for (int i = 0; i < 10; i++)
 		std::cout << arr[i] << " ";
+
 	std::cout << std::endl;
-	
+	std::cout << "Heap =======" << std::endl;
+
+	for (int i = 0; i < 10; i++)
+		arr[i] = rand() % 100;
+	std::cout << "정렬전 : ";
+	for (int i = 0; i < 10; i++)
+		std::cout << arr[i] << " ";
+	std::cout << std::endl;
+	SortExamples::HeapSort(arr, 10);
+	std::cout << "정렬후 : ";
+	for (int i = 0; i < 10; i++)
+		std::cout << arr[i] << " ";
+	std::cout << std::endl;
+
 	return 0;
 }
