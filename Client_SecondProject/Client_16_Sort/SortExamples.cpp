@@ -89,8 +89,9 @@ void SortExamples::QuickSort(int* arr, int start, int end) {
 void SortExamples::HeapSort(int arr[], int length) {
 	// Heapify 
 	Heapify_TopDown(arr, length);
+	//Heapify_BottomUp(arr, length);
 	int end = length - 1;
-	while (end > 0) {
+	while (end >= 0) {
 		int tmp = arr[0];
 		arr[0] = arr[end];
 		arr[end] = tmp;
@@ -157,6 +158,16 @@ void SortExamples::Heapify_TopDown(int* arr, int length) {
 	}
 }
 
+void SortExamples::Heapify_BottomUp(int* arr, int length) {
+	int end = length - 1;
+	int current = end - 1;
+
+	while (current >= 0) {
+		SIFT_Down(arr, end, current);
+		current--;
+	}
+}
+
 void SortExamples::SIFT_Up(int* arr, int root, int current) {
 	int parent = current / 2;
 	while (current > root) {
@@ -176,33 +187,53 @@ void SortExamples::SIFT_Up(int* arr, int root, int current) {
 
 void SortExamples::SIFT_Down(int* arr, int end, int current) {
 	bool doSwap = false;
-	int parent = 0;
-	/*if (end < 2) {
-		if (arr[0] < arr[1]) {
-			int tmp = arr[0];
-			arr[0] = arr[1];
-			arr[1] = tmp;
+	int parent;
+	parent = (current - 1) / 2;
+	/*int left;
+	int right;
+	int max;
+
+	while ((current * 2) + 1 <= end) {
+		left = (current * 2) + 1;
+		right = (current * 2) + 2;
+		max = current;
+
+		if (arr[left] > arr[max]) {
+			max = left;
+		}
+
+		if (right <= end && arr[right] > arr[max]) {
+			max = right;
+		}
+
+		if (max != current) {
+			Swap(arr[current], arr[max]);
+			current = max;
+		}
+		else {
 			return;
 		}
 	}*/
 	while (current <= end) {
-		if ((current + 1) <= end &&
+		/*if (current == parent) break;*/
+		if ((current +1) <= end &&
 			arr[current] < arr[current + 1])
 			current++;
+	
 		if (arr[parent] < arr[current])
 			doSwap = true;
-
-		if (doSwap) {
+	
+		if (/*(parent != current) &&*/ doSwap) {
 			int tmp = arr[parent];
 			arr[parent] = arr[current];
 			arr[current] = tmp;
 			doSwap = false;
 			parent = current;
-			current = parent * 2 + 1;
+			current = (parent * 2) + 1;
 		}
 		else {
 			break;
 		}
-
+	
 	}
 }

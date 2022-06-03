@@ -37,10 +37,10 @@
 //
 int main(void) {
 	
-	int arr[10];
+	int arr[100];
 	srand(time(nullptr));
 
-	for (int i = 0; i < 10; i++) 
+	/*for (int i = 0; i < 10; i++) 
 		arr[i] = rand() % 1000;
 	SortExamples::BubbleSort(arr, sizeof(arr)/ sizeof(arr[0]));
 	
@@ -74,18 +74,19 @@ int main(void) {
 	for (int i = 0; i < 10; i++)
 		std::cout << arr[i] << " ";
 
-	std::cout << std::endl;
+	std::cout << std::endl;*/
 	std::cout << "Heap =======" << std::endl;
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 100; i++)
 		arr[i] = rand() % 100;
 	std::cout << "정렬전 : ";
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 100; i++)
 		std::cout << arr[i] << " ";
 	std::cout << std::endl;
-	SortExamples::HeapSort(arr, 10);
+	SortExamples::HeapSort(arr, 100);
+
 	std::cout << "정렬후 : ";
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 100; i++)
 		std::cout << arr[i] << " ";
 	std::cout << std::endl;
 
