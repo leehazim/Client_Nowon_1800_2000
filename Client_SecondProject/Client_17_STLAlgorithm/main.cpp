@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#pragma warning(disable : 4996)
 
 class Player {
 public:
@@ -13,16 +14,20 @@ public:
 		m_score = score;
 	}
 
-	bool operator <(Player& player) {
+	bool operator <(const Player& player) const {
 		return m_score < player.m_score;
 	}
-	bool operator >(Player& player) {
+	bool operator >(const Player& player) const {
 		return m_score > player.m_score;
 	}
 	bool operator ==(Player& player) {
 		return m_score == player.m_score;
 	}
 };
+ 
+bool IsABeatB(Player& player1,Player& player2) {
+	return player1 > player2;
+}
 
 int main(void) {
 
@@ -60,19 +65,35 @@ int main(void) {
 
 	std::vector<Player> rank;
 	std::vector<Player>::iterator it;
-	rank.push_back(Player("joshua", rand() % 100));
+	/*rank.push_back(Player("joshua", rand() % 100));
 	rank.push_back(Player("jungmin", rand() % 100));
 	rank.push_back(Player("julia", rand() % 100));
 	rank.push_back(Player("Mike", rand() % 100));
+	rank.push_back(Player("SU", rand() % 100));
+	rank.push_back(Player("john", rand() % 100));
+	rank.push_back(Player("komi", rand() % 100));*/
+	char str[128] = "";
+	for (int i = 0; i <10; i++) {
+		strcat(str, "a");
+		rank.push_back(Player(str, rand() % 100));
+	}
 	for (it = rank.begin(); it != rank.end(); it++) {
-		std::cout << it->m_nickName << ": " << it->m_score;
-		std::cout << std::endl;
+		std::cout <<  " : " << it->m_score << " ";
+		/*std::cout << std::endl;*/
 	}
 	std::cout << std::endl;
-	std::sort(rank.begin(), rank.end());
+	//std::sort(rank.begin(), rank.end());
+
+	/*partial_sort(rank.begin(), rank.begin() + 3, rank.end(), IsABeatB);*/
+	/*partial_sort(rank.begin(), rank.begin() + 3, rank.end(), std::greater<>());*/
+	//partial_sort(rank.begin(), rank.begin() + 3, rank.end(), std::less<>());
+
+ 	/*nth_element(rank.begin(), rank.begin() + 3, rank.end());*/
+	//sort(rank.begin(), rank.end(), std::less<>());
+	stable_sort(rank.begin(),rank.end(), std::less<>());
 	for (it = rank.begin(); it != rank.end(); it++) {
-		std::cout << it->m_nickName << ": " << it->m_score;
-		std::cout << std::endl;
+		std::cout << " : " << it->m_score << " ";
 	}
+	std::cout << std::endl;
 	return 0; 
 }
