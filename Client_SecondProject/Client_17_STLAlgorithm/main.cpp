@@ -2,6 +2,8 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <numeric>
+#include <math.h>
 #pragma warning(disable : 4996)
 
 class Player {
@@ -94,6 +96,43 @@ int main(void) {
 	for (it = rank.begin(); it != rank.end(); it++) {
 		std::cout << " : " << it->m_score << " ";
 	}
+	std::cout << std::endl;
+
+	// 벡터등 배열에 들어있는 모든 데이터들의 값을 합산하고 싶을때 사용
+	int acc = std::accumulate(arr, arr + 10, 10);
+	std::cout << "누적값 : " << acc << std::endl;
+	
+	// 절대값 변경
+	/*int result = abs(-10);
+	std::cout << result << std::endl;*/
+
+	int arr2[10];
+	for (int i = 0; i < 10; i++)
+		std::cout << arr[i] << " ";
+	std::cout << std::endl;
+	std::partial_sum(arr, arr + 10, arr2);
+	for(int i = 0; i<10; i++)
+		std::cout << arr2[i] << " ";
+	std::cout << std::endl;
+
+	std::adjacent_difference(arr, arr + 10, arr2);
+	for (int i = 0; i < 10; i++)
+		std::cout << arr2[i] << " ";
+	std::cout << std::endl;
+
+	// 벡터의 내적
+	int coord1[3] = { 1,5,3 };
+	int coord2[3] = { 2,5,4 };
+	int size = (coord2[0] * coord2[0]) + (coord2[1] * coord2[1]) + (coord2[2] * coord2[2]);
+	int dotResult = std::inner_product(coord1, coord1 + 3, coord2, 0);
+	for (int i = 0; i < 3; i++)
+		coord2[i] /= size;
+	
+	std::cout << dotResult << std::endl;
+	for (int i = 0; i < 3; i++)
+		coord2[i] *= dotResult;
+	for (int i = 0; i < 3; i++)
+		std::cout << coord2[i] << " ";
 	std::cout << std::endl;
 	return 0; 
 }
